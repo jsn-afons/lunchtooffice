@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LunchToOffice - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e9590c",
+                        "primary-hover": "#cc4d0a",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#221610",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2d1e17",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom styles for radio selection visualization */
+        .role-radio:checked+div {
+            border-color: #e9590c;
+            background-color: rgba(233, 89, 12, 0.05);
+        }
+
+        .role-radio:checked+div .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .role-radio:checked+div .role-icon {
+            color: #e9590c;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-100 antialiased min-h-screen flex items-center justify-center p-4">
+    <!-- Main Container -->
+    <div class="w-full max-w-2xl">
+        <!-- Logo Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center gap-2 mb-2">
+                <span class="material-icons-round text-primary text-4xl">lunch_dining</span>
+                <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">LunchToOffice</span>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Join the team lunch</h1>
+            <p class="text-gray-500 dark:text-gray-400">Select your role to get started.</p>
+        </div>
+        <!-- Card -->
+        <div
+            class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 p-6 md:p-10">
+            <form action="#" class="space-y-8" method="POST">
+                <!-- Role Selection Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Staff Role -->
+                    <label class="cursor-pointer relative group">
+                        <input checked="" class="role-radio sr-only" name="role" type="radio" value="staff" />
+                        <div
+                            class="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-5 flex flex-col items-center justify-center text-center transition-all duration-200 hover:border-primary/50 group-hover:bg-gray-50 dark:group-hover:bg-gray-800/50 h-full relative">
+                            <!-- Checkmark for active state -->
+                            <div
+                                class="check-icon absolute top-3 right-3 opacity-0 transform scale-75 transition-all duration-200 bg-primary text-white rounded-full p-0.5">
+                                <span class="material-icons-round text-sm">check</span>
+                            </div>
+                            <span
+                                class="material-icons-round text-5xl text-gray-400 dark:text-gray-500 mb-3 role-icon transition-colors">badge</span>
+                            <h3 class="font-bold text-lg text-gray-900 dark:text-white">Staff Member</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-snug">I want to order lunch
+                                to my office desk.</p>
+                        </div>
+                    </label>
+                    <!-- Admin Role -->
+                    <label class="cursor-pointer relative group">
+                        <input class="role-radio sr-only" name="role" type="radio" value="admin" />
+                        <div
+                            class="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-5 flex flex-col items-center justify-center text-center transition-all duration-200 hover:border-primary/50 group-hover:bg-gray-50 dark:group-hover:bg-gray-800/50 h-full relative">
+                            <!-- Checkmark for active state -->
+                            <div
+                                class="check-icon absolute top-3 right-3 opacity-0 transform scale-75 transition-all duration-200 bg-primary text-white rounded-full p-0.5">
+                                <span class="material-icons-round text-sm">check</span>
+                            </div>
+                            <span
+                                class="material-icons-round text-5xl text-gray-400 dark:text-gray-500 mb-3 role-icon transition-colors">admin_panel_settings</span>
+                            <h3 class="font-bold text-lg text-gray-900 dark:text-white">Office Admin</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-snug">I manage lunch orders
+                                for my company.</p>
+                        </div>
+                    </label>
+                </div>
+                <!-- Inputs Section -->
+                <div class="space-y-5">
+                    <!-- Name Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-1.5">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                for="first-name">First Name</label>
+                            <input
+                                class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
+                                id="first-name" name="first-name" placeholder="Jane" type="text" />
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                for="last-name">Last Name</label>
+                            <input
+                                class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
+                                id="last-name" name="last-name" placeholder="Doe" type="text" />
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="space-y-1.5">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="email">Work
+                            Email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="material-icons-round text-gray-400 text-lg">email</span>
+                            </div>
+                            <input
+                                class="block w-full pl-10 rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5"
+                                id="email" name="email" placeholder="jane@company.com" type="email" />
+                        </div>
+                    </div>
+                    <!-- Password Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-1.5">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                for="password">Password</label>
+                            <div class="relative">
+                                <input
+                                    class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3 pr-10"
+                                    id="password" name="password" type="password" />
+                                <button
+                                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none"
+                                    type="button">
+                                    <span class="material-icons-round text-lg">visibility_off</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                for="confirm-password">Confirm Password</label>
+                            <input
+                                class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
+                                id="confirm-password" name="confirm-password" type="password" />
+                        </div>
+                    </div>
+                    <!-- Terms Checkbox -->
+                    <div class="flex items-start pt-2">
+                        <div class="flex h-5 items-center">
+                            <input
+                                class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary bg-gray-100 dark:bg-gray-800 dark:border-gray-600"
+                                id="terms" name="terms" type="checkbox" />
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label class="text-gray-500 dark:text-gray-400" for="terms">I agree to the <a
+                                    class="font-medium text-primary hover:text-primary-hover" href="#">Terms of
+                                    Service</a> and <a class="font-medium text-primary hover:text-primary-hover"
+                                    href="#">Privacy Policy</a>.</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit Action -->
+                <div>
+                    <button
+                        class="flex w-full justify-center rounded-lg bg-primary py-3 px-4 text-sm font-bold text-white shadow-sm hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors duration-200"
+                        type="submit">
+                        Create Account
+                    </button>
+                    <p class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+                        Already have an account?
+                        <a class="font-bold leading-6 text-primary hover:text-primary-hover hover:underline transition-all"
+                            href="#">Sign in</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <!-- Subtle Footer Info -->
+        <div class="mt-8 text-center text-xs text-gray-400 dark:text-gray-600">
+            © 2023 LunchToOffice Inc. All rights reserved.
+        </div>
+    </div>
+    <!-- Decorative Image Panel (Hidden on mobile, visible as background graphic on very large screens if desired, but here kept minimal as requested) -->
+    <!-- Instead of a full split screen, let's add a subtle abstract shape or gradient behind for visual interest if needed, 
+         but the prompt asked for a clean centered card layout. I will keep it clean. -->
+</body>
+
+</html>

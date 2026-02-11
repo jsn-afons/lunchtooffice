@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LunchToOffice - Office Lunch, Simplified</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e9590c",
+                        "primary-dark": "#c2410c", // Darker shade for hover
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#221610",
+                        "slate-gray": "#334155",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-gray-100 antialiased selection:bg-primary selection:text-white">
+    <!-- Navigation Bar -->
+    <nav
+        class="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-background-dark/80 border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white">
+                        <span class="material-icons text-lg">lunch_dining</span>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">LunchToOffice</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                        href="#">How it Works</a>
+                    <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                        href="#">Restaurants</a>
+                    <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                        href="#">For Companies</a>
+                </div>
+                <!-- Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a class="text-primary hover:text-primary-dark font-semibold px-4 py-2 transition-colors"
+                        href="#">Log in</a>
+                    <button
+                        class="bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-primary/30 transform hover:-translate-y-0.5">
+                        Sign Up
+                    </button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-slate-600 dark:text-gray-300 hover:text-primary">
+                        <span class="material-icons text-3xl">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="relative w-full h-[600px] lg:h-[700px] flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img alt="Delicious healthy office lunch spread on a table" class="w-full h-full object-cover"
+                data-alt="Delicious healthy office lunch spread on a table"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHF_5WRCkIf4_WRmxOQh59tpx8iEnaKpptqeKwJ1hRcnm1LwN7vgLM8YvJwl-PHh0udy45p_HbLXX2TclNMnfIeMsjgrA3woyy_y3fnp47amPHTsTFLRVyQESamSR7z6-ABUuYVHqjIojpmzEPs5NW57dkb15-6RfW43DO4IVDlM1UE4_-NDduICILIgu3B7zy_BLmnZyR7D-NUusMZ1D-A6jFaq22t7fE6Um9LCXzROERmPaI6DNEEaW-kwSCI160Vhax-gVzO-9k" />
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-transparent"></div>
+        </div>
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-2xl">
+                <span
+                    class="inline-block py-1 px-3 rounded-full bg-primary/20 border border-primary/30 text-primary-dark dark:text-orange-300 font-semibold text-sm mb-6 backdrop-blur-sm">
+                    🚀 Now delivering to downtown offices
+                </span>
+                <h1 class="text-5xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-[1.1]">
+                    Office Lunch, <br />
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-300">Simplified.</span>
+                </h1>
+                <p class="text-lg lg:text-xl text-gray-200 mb-10 leading-relaxed font-light">
+                    Delicious meals from top local restaurants delivered straight to your desk. No more sad desk
+                    lunches. One delivery, zero hassle.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button
+                        class="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-xl shadow-primary/25 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        For Restaurants
+                        <span class="material-icons text-xl">restaurant_menu</span>
+                    </button>
+                    <button
+                        class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2">
+                        For Companies
+                        <span class="material-icons text-xl">business</span>
+                    </button>
+                </div>
+                <div class="mt-12 flex items-center gap-4 text-sm text-gray-300 font-medium">
+                    <div class="flex -space-x-2">
+                        <img alt="User Avatar" class="inline-block h-8 w-8 rounded-full ring-2 ring-slate-900"
+                            data-alt="Portrait of a smiling young woman"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9jI8l_yPdmnD71wOt5np1ddUZ21P_j3NUnSOJIADL8jd44Ef99LzTw3obxYGAvLk-9vE1SFwKBjabWkdEv0YYI3gNwsG9Qldko2NL9nVRfqBbSppGQdCLUtAPwe2Ap4F2CK_xGmFOOemcc6suN644JX-JJxLlQ45HZRu21j8kfi_jUTm9eNjjHhgOaDAwVVfJywe3PB0JkxcaPQ2edF5PHA2NdOim24D9S-Wj8swxteDWoBHGNQhMju5cNxpspwXYBqOGbRRB-GH7" />
+                        <img alt="User Avatar" class="inline-block h-8 w-8 rounded-full ring-2 ring-slate-900"
+                            data-alt="Portrait of a young man"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJs1Vvs6NO20oIe-nR83Ljg1JsUIkqhjvnsQlgR4M-KUt76Q-IDgWaI9uuvzlFvBExGa0DrhJ8jpdTyWK5hAWurNuaksrHlq27NnOWF4SqwTqUh0DaixtNGgTpwH6rUgoZGIDs9eaXYdOSeLzEyOy0T8U8MCO9_HaEknUfkLuqI5wH9-hRu1YXqW3JYxYNphd73Lv9fTOc0W8SMzE72ZzZnBRofrML-9cEmWPP5s6rF6S6VQzJV1mE6QZ4wMjMWh6E07PYCFBrKyEw" />
+                        <img alt="User Avatar" class="inline-block h-8 w-8 rounded-full ring-2 ring-slate-900"
+                            data-alt="Portrait of a smiling man"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3_DU5YBmFrgbeFLRjoS8DeDMFXyMvzqBvHMPFfFi3IdPYYpiGpz9Ei__e7yvXlKJJG2VQAoPkfGDtaa8IHLAj8z_MWntlBRCHAR0x7cZatQBp15O3dQdb810ECCra93cz85hWvXaZQaE54xxQZpDVlfV-LYYmdfUj7PJnp3ACCmvvJ6LzO2owrbqe67r66Tq_w9emZLMQ94kwwHmf24zu6OP-2JqUqsaj_kDQ4QcP-evZqs9dZ7UBCQnLwcEbqZrzGyzjI5Elkxcv" />
+                    </div>
+                    <span>Trusted by 500+ teams locally</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Logo Cloud / Social Proof -->
+    <section class="py-10 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6">Partnering with
+                top local restaurants</p>
+            <div
+                class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Using simple text or icon placeholders for logos to simulate variety -->
+                <div class="flex items-center gap-2 font-bold text-xl text-slate-700 dark:text-slate-300"><span
+                        class="material-icons">ramen_dining</span> NoodleBar</div>
+                <div class="flex items-center gap-2 font-bold text-xl text-slate-700 dark:text-slate-300"><span
+                        class="material-icons">local_pizza</span> Crust&amp;Co</div>
+                <div class="flex items-center gap-2 font-bold text-xl text-slate-700 dark:text-slate-300"><span
+                        class="material-icons">lunch_dining</span> BurgerJoint</div>
+                <div class="flex items-center gap-2 font-bold text-xl text-slate-700 dark:text-slate-300"><span
+                        class="material-icons">set_meal</span> FreshFish</div>
+                <div class="flex items-center gap-2 font-bold text-xl text-slate-700 dark:text-slate-300"><span
+                        class="material-icons">bakery_dining</span> SweetSpot</div>
+            </div>
+        </div>
+    </section>
+    <!-- How it Works Section -->
+    <section class="py-24 bg-background-light dark:bg-background-dark relative">
+        <!-- Decorative abstract shape -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div
+            class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-orange-200/10 dark:bg-orange-900/10 rounded-full blur-3xl">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-primary font-bold tracking-wide uppercase text-sm mb-2">Process</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">How LunchToOffice
+                    Works</h3>
+                <p class="text-lg text-slate-600 dark:text-gray-400">Streamline your daily office meals in three simple
+                    steps. We handle the logistics, you enjoy the food.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Step 1 -->
+                <div
+                    class="bg-white dark:bg-white/5 rounded-2xl p-8 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-white/10 transition-transform hover:-translate-y-2 group">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-orange-100 dark:bg-primary/20 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-icons text-3xl">storefront</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3">1. Select Restaurant</h4>
+                    <p class="text-slate-600 dark:text-gray-400 leading-relaxed">
+                        Browse curated menus from the city's best spots. We partner with top-rated local gems, not just
+                        fast food chains.
+                    </p>
+                </div>
+                <!-- Step 2 -->
+                <div
+                    class="bg-white dark:bg-white/5 rounded-2xl p-8 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-white/10 transition-transform hover:-translate-y-2 group">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-orange-100 dark:bg-primary/20 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-icons text-3xl">touch_app</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3">2. Order Food</h4>
+                    <p class="text-slate-600 dark:text-gray-400 leading-relaxed">
+                        Team members place individual orders by 10 AM. Everyone gets exactly what they want, no
+                        compromise needed.
+                    </p>
+                </div>
+                <!-- Step 3 -->
+                <div
+                    class="bg-white dark:bg-white/5 rounded-2xl p-8 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-white/10 transition-transform hover:-translate-y-2 group">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-orange-100 dark:bg-primary/20 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-icons text-3xl">emoji_emotions</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3">3. Eat Together</h4>
+                    <p class="text-slate-600 dark:text-gray-400 leading-relaxed">
+                        One consolidated delivery arrives right at lunchtime. Save on delivery fees and enjoy lunch with
+                        your team.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Promo / Stats Section -->
+    <section class="py-20 bg-white dark:bg-background-dark border-t border-gray-100 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-900 dark:bg-slate-800 rounded-3xl overflow-hidden relative shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-10 lg:p-16 flex flex-col justify-center relative z-10">
+                        <h3 class="text-3xl font-bold text-white mb-6">Why companies love us</h3>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div
+                                    class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                    <span class="material-icons">savings</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-semibold text-lg">Save on Delivery Fees</h5>
+                                    <p class="text-slate-400 mt-1">Consolidated delivery means you pay one fee for the
+                                        whole office, not per person.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                    <span class="material-icons">schedule</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-semibold text-lg">Always On Time</h5>
+                                    <p class="text-slate-400 mt-1">Our dedicated fleet ensures your food arrives
+                                        precisely when your break starts.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                    <span class="material-icons">eco</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-semibold text-lg">Less Waste</h5>
+                                    <p class="text-slate-400 mt-1">Bulk packaging options reduce plastic waste by up to
+                                        40%.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative h-64 lg:h-auto">
+                        <img alt="Happy colleagues eating lunch together in a modern office"
+                            class="absolute inset-0 w-full h-full object-cover"
+                            data-alt="Happy colleagues eating lunch together in a modern office"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD22L2Qd4xcuuhS5f117vgv3C0fWfS7aJjWODqiadY15Hw8MB9JxD2o-Io6cMUvO9IBK_Vg3dmBYNvgmzhv2NHwYGG0mgrnOiKqyC_wk2Ivma4bLsaFbelBSt51_rfIUmO5xg43Rv-ZWZEmCNvc3xSzf7TgRWIxUcVxdMRqFWS1FqLQ5gBJ4dT8CCWl7kgwt-I0yHfvwporuzjfQ3i4CFJCO74vJVDxZd9LlE-aUp0T2LRn4fr-YjNXsUS8Aikay2UEXFNSUpeZhSld" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent lg:bg-gradient-to-r">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Popular Items Preview -->
+    <section class="py-24 bg-background-light dark:bg-background-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h3 class="text-3xl font-bold text-slate-900 dark:text-white">This Week's Favorites</h3>
+                    <p class="text-slate-600 dark:text-gray-400 mt-2">What local offices are ordering most.</p>
+                </div>
+                <a class="hidden md:flex items-center text-primary font-semibold hover:text-primary-dark group"
+                    href="#">
+                    View Full Menu
+                    <span
+                        class="material-icons ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div
+                    class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img alt="Healthy green salad bowl with avocado"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            data-alt="Healthy green salad bowl with avocado"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEFM-5ZD8jgWj3Uv6YNYE6gEIQiI34Q78otESWRvai6T5Hvp8GwFsp42PkKQiSkW7Oizv7_asUq0WxWz1eJrzHbXfi4MQgiIgwCTAv22G-aj7-fcrcy9Po9QAqFm9bwHLlfANWoWvnh0zUA9Qqn5Xq5xwcnOoxXMzNODe0eRbvmc9n-dqSowRZ7ILXwEnEvJ-wnHd4tKo31PYeq9Iq8TJcQWpekYFs0U_gUbxuccHicu1jP-q-HxC2sIqLYF_RrTbljUM746xJjLic" />
+                        <div
+                            class="absolute top-2 right-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-800 dark:text-white">
+                            $12.50
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-primary font-bold uppercase mb-1">Green &amp; Grains</div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-lg mb-1">Superfood Salad Bowl</h4>
+                        <p class="text-sm text-slate-500 dark:text-gray-400 line-clamp-2">Quinoa, avocado, kale, roasted
+                            sweet potato, and tahini dressing.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img alt="Gourmet beef burger with cheese"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            data-alt="Gourmet beef burger with cheese"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCknUf47SiJSAwPMcDcXDg4MGkobNQl1ML571AtfBRJphW-e5Rityfe7hUAeBDenjGu9dJys4-kJxEBccNE3-Qiv-pIczAbb0TxHMMXMXnwnxtX5ieWwI_fYl8CqvhlwynwHJZOChiXryKWH6Cgm8TX8iXirHWJ0eUvIx_E2G6OxDKdAsEcxhsuuRFJcDe-Jk6tmkhsN3_qrzDKg5y82B-7-ybqfn5QJP4S0zy5Jsm-pogAc4GVyotBOQFyYM-heA_Shdfif2EOebP2" />
+                        <div
+                            class="absolute top-2 right-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-800 dark:text-white">
+                            $14.00
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-primary font-bold uppercase mb-1">Burger Joint</div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-lg mb-1">Classic Cheese Smash</h4>
+                        <p class="text-sm text-slate-500 dark:text-gray-400 line-clamp-2">Double beef patty, cheddar,
+                            house pickles, and secret sauce on brioche.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img alt="Fresh poke bowl with salmon and vegetables"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            data-alt="Fresh poke bowl with salmon and vegetables"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS2xoZD8hdW0Isw2K8mP4eCMf9YFbLiLOZdyh4VImzDLQTTUu7szgA3Qv9hVb2TW1O-k-j1NSa9JDIJ7uGC1vWW6aIhptBewBmIYnyIjDsdym5mSEjWEOdtjLnOoPqmre9iHJeJ2sqkDNNU5_CkwVp0PQO54TAF1FVinHPya_X7dDibgLiwCfEMkexIUc6SHnhx6wMXPuk6F3JomEewtIBzpiSuHqmEVvKP480gSnPKcOId7XWshUlj_h02vhw_D6l2TIvymaWk7s1" />
+                        <div
+                            class="absolute top-2 right-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-800 dark:text-white">
+                            $16.00
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-primary font-bold uppercase mb-1">Poke Paradise</div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-lg mb-1">Spicy Salmon Poke</h4>
+                        <p class="text-sm text-slate-500 dark:text-gray-400 line-clamp-2">Fresh salmon, edamame,
+                            cucumber, crispy onions, and spicy mayo.</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div
+                    class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img alt="Fried chicken sandwich with coleslaw"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            data-alt="Fried chicken sandwich with coleslaw"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVmAvSrpOJMNYa_PU2bPNpAhw1vnPTkZ9UstzfeTbhtPX1JgAThTDkVBPVMgVqp9PyIlmBXbEhENaPxHgf00x3qGsTM_womz7lrepT2OACL1_0WcsisnA4UF0sOYr6fC9FYib_2txZ6RdQJ_E9Gj3Lyh05C1CvGfsO0tn9uLunpsNDQy6WHdVmj1M-V80lDHs-7DeMDiVKIhklJgVR2nlsbZZJn56xbHUwD2nKGcEesDLJibG4_J-igpg1TMqZ8LqZjY5HApHQ452u" />
+                        <div
+                            class="absolute top-2 right-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-800 dark:text-white">
+                            $13.50
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-primary font-bold uppercase mb-1">Crispy Co.</div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-lg mb-1">Southern Fried Sandwich</h4>
+                        <p class="text-sm text-slate-500 dark:text-gray-400 line-clamp-2">Buttermilk fried chicken,
+                            coleslaw, pickles, and hot honey drizzle.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center md:hidden">
+                <a class="inline-flex items-center text-primary font-semibold hover:text-primary-dark" href="#">
+                    View Full Menu
+                    <span class="material-icons ml-1">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-slate-900 dark:bg-black">
+            <div
+                class="absolute inset-0 bg-primary/10 bg-[radial-gradient(#e9590c_1px,transparent_1px)] [background-size:16px_16px] opacity-20">
+            </div>
+        </div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">Ready to upgrade your lunch?</h2>
+            <p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">Join hundreds of local companies enjoying better
+                food, less hassle, and happier teams.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button
+                    class="bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-xl font-bold text-lg transition-all shadow-xl shadow-primary/30 transform hover:-translate-y-1">
+                    Get Started for Free
+                </button>
+                <button
+                    class="bg-transparent border border-slate-600 hover:bg-slate-800 text-white px-10 py-4 rounded-xl font-bold text-lg transition-all">
+                    Contact Sales
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-slate-50 dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white">
+                            <span class="material-icons text-sm">lunch_dining</span>
+                        </div>
+                        <span class="font-bold text-xl text-slate-900 dark:text-white">LunchToOffice</span>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-gray-400 mb-6">
+                        Making office lunches the best part of the workday. Fresh, reliable, and delicious.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a class="text-slate-400 hover:text-primary transition-colors" href="#"><span
+                                class="material-icons">facebook</span></a>
+                        <a class="text-slate-400 hover:text-primary transition-colors" href="#"><span
+                                class="material-icons">rss_feed</span></a> <!-- Placeholder for Twitter/X -->
+                        <a class="text-slate-400 hover:text-primary transition-colors" href="#"><span
+                                class="material-icons">photo_camera</span></a> <!-- Placeholder for Instagram -->
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">Company</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-gray-400">
+                        <li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">Support</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-gray-400">
+                        <li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Contact Support</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Suggest a Restaurant</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">System Status</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-gray-400">
+                        <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-slate-500 dark:text-gray-500">© {{ date.year }} LunchToOffice Inc. All rights
+                    reserved.</p>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                    <span class="text-xs text-slate-500 dark:text-gray-500 font-medium">All systems operational</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
