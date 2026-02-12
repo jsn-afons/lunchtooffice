@@ -59,6 +59,22 @@
 
 <body
     class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-100 antialiased min-h-screen flex items-center justify-center p-4">
+    {% if messages %}
+    <div class="fixed top-4 right-4 z-50 w-full max-w-sm">
+        {% for message in messages %}
+        <div
+            class="mb-4 rounded-lg p-4 shadow-lg text-white 
+                {% if message.tags == 'success' %} bg-green-500 {% elif message.tags == 'error' %} bg-red-500 {% else %} bg-blue-500 {% endif %}">
+            <div class="flex items-center">
+                <span class="font-bold text-lg mr-2">
+                    {% if message.tags == 'success' %} ✓ {% elif message.tags == 'error' %} ⚠ {% else %} ℹ {% endif %}
+                </span>
+                <p>{{ message }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <!-- Main Container -->
     <div class="w-full max-w-2xl">
         <!-- Logo Header -->
@@ -73,7 +89,8 @@
         <!-- Card -->
         <div
             class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 p-6 md:p-10">
-            <form action="#" class="space-y-8" method="POST">
+            <form action="{% url 'signup' %}" class="space-y-8" method="POST">
+                {% csrf_token %}
                 <!-- Role Selection Section -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Staff Role -->
@@ -118,16 +135,19 @@
                         <div class="space-y-1.5">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 for="first-name">First Name</label>
-                            <input
+                            <!-- <input
                                 class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
-                                id="first-name" name="first-name" placeholder="Jane" type="text" />
+                                id="first-name" name="first-name" placeholder="Jane" type="text" /> -->
+                            {{ form.first_name }}
                         </div>
+
                         <div class="space-y-1.5">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 for="last-name">Last Name</label>
-                            <input
+                            <!-- <input
                                 class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
-                                id="last-name" name="last-name" placeholder="Doe" type="text" />
+                                id="last-name" name="last-name" placeholder="Doe" type="text" /> -->
+                            {{ form.last_name }}
                         </div>
                     </div>
                     <!-- Email -->
@@ -136,11 +156,12 @@
                             Email</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="material-icons-round text-gray-400 text-lg">email</span>
+                                <!-- <span class="material-icons-round text-gray-400 text-lg">email</span> -->
                             </div>
-                            <input
+                            <!-- <input
                                 class="block w-full pl-10 rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5"
-                                id="email" name="email" placeholder="jane@company.com" type="email" />
+                                id="email" name="email" placeholder="jane@company.com" type="email" /> -->
+                            {{ form.email }}
                         </div>
                     </div>
                     <!-- Password Row -->
@@ -149,9 +170,10 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 for="password">Password</label>
                             <div class="relative">
-                                <input
+                                <!-- <input
                                     class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3 pr-10"
-                                    id="password" name="password" type="password" />
+                                    id="password" name="password" type="password" /> -->
+                                {{ form.password }}
                                 <button
                                     class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none"
                                     type="button">
@@ -162,9 +184,10 @@
                         <div class="space-y-1.5">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 for="confirm-password">Confirm Password</label>
-                            <input
+                            <!-- <input
                                 class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
-                                id="confirm-password" name="confirm-password" type="password" />
+                                id="confirm-password" name="confirm-password" type="password" /> -->
+                            {{ form.confirm_password }}
                         </div>
                     </div>
                     <!-- Terms Checkbox -->

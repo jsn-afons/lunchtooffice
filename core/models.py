@@ -67,11 +67,9 @@ class Organization(models.Model):
     
     def __str__(self):
         return self.name.title()
-    
-
 
 class User(AbstractUser):
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, blank=True)
     phonenumber = PhoneNumberField(blank=True, region='GH')
     username = None #Remove Username from table
     USERNAME_FIELD = 'email' #Tells django to use email instead of username
@@ -90,7 +88,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.first_name.title() + ' ' + self.last_name.title()
-
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=50, help_text="What\'s the name of your Restaurant?")
@@ -126,9 +123,8 @@ class Menu(models.Model):
 
     def __str__(self):
         return f"{self.menu_item.title()} - {self.restaurant.name.title()}"
-    
 
-class UserOrderActions(models.Model):
+class UserOrderAction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     menu_item = models.ForeignKey(Menu, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
