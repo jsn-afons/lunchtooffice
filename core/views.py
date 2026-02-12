@@ -45,16 +45,16 @@ def signup(request):
         form = OrganizationSignUpForm(request.POST) #populates with user sent data
         if form.is_valid():
             try:
-                with transaction.atomic():
+                with transaction.atomic():                 
                     org = Organization.objects.create(
-                        org_name = form.cleaned_data['org_name'],
+                        org_name = form.cleaned_data['org_name'].title(),
                         org_phonenumber = form.cleaned_data['org_phonenumber'],
                         org_address = form.cleaned_data['org_address'],
                     )
                     
                     user = User.objects.create_user(
-                        first_name = form.cleaned_data['first_name'],
-                        last_name= form.cleaned_data['last_name'],
+                        first_name = form.cleaned_data['first_name'].title(),
+                        last_name= form.cleaned_data['last_name'].title(),
                         email= form.cleaned_data['email'],
                         password = form.cleaned_data['password'],
                         organization= org,
@@ -63,7 +63,7 @@ def signup(request):
                     )
 
                     login(request, user)
-                    messages.success(request, f'Successfully Created {org_name}')
+                    messages.success(request, f'Successfully Created {org.org_name}')
                     return redirect('restaurant_selection')
 
             except Exception as e:

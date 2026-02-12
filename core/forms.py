@@ -1,5 +1,6 @@
 from django import forms
 from phonenumber_field.formfields import PhoneNumberField
+from .models import User, Organization
 
 class LoginForm(forms.Form):
     email = forms.EmailField(max_length=30, widget=forms.EmailInput(attrs={'placeholder': 'you@example.com', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
@@ -7,7 +8,7 @@ class LoginForm(forms.Form):
 
 
 class SignupForm(forms.Form):
-    ...
+    pass
 
 class OrganizationSignUpForm(forms.Form):
     org_name = forms.CharField(max_length=100)
@@ -26,8 +27,21 @@ class OrganizationSignUpForm(forms.Form):
         confirm_password = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
-            raise forms.ValidationError("Passwords do not match")
+            # FIX: Add the error specifically to the confirm_password field
+            self.add_error('confirm_password', "Passwords do not match")
         return cleaned_data
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and User.objects.filter(email=email.lower()).exists():
+            raise ValidationError('User already exists')
+        return email.lower()
+        
+    def clean_org_name(self):
+        org_name = self.cleaned_data.get('org_name')
+        if org_name and Organization.objects.filter(org_name=org_name).exists():
+            raise ValidationError('Organization already exists')
+        return org_name
 
 
 
