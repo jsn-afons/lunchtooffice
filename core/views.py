@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 import datetime
 from .forms import *
 from .models import *
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
 
@@ -76,6 +77,7 @@ def signup(request):
     }
     return render(request, 'core/signup.html', context)
 
+@login_required
 def restaurant_selection(request):
     restaurants = Restaurant.objects.all()
     context = {
@@ -83,6 +85,7 @@ def restaurant_selection(request):
     }
     return render(request, 'core/restaurant_selection.html', context)
 
+@login_required
 def menu(request, restaurant_id):
     menu_items = Menu.objects.filter(restaurant=restaurant_id)
     context = {
@@ -91,4 +94,5 @@ def menu(request, restaurant_id):
     return render(request, 'core/menu.html', context)
 
 def logout(request):
+    logout(request)
     return redirect('home')

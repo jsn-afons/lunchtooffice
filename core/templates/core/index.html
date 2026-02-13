@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}LunchToOffice - Office Lunch, Simplified{% endblock %}
 
@@ -6,44 +6,7 @@
 
 {% block body %}
 <!-- Navigation Bar -->
-<nav
-    class="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-background-dark/80 border-b border-gray-200 dark:border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
-            <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white">
-                    <span class="material-icons text-lg">lunch_dining</span>
-                </div>
-                <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">LunchToOffice</span>
-            </div>
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-8 items-center">
-                <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
-                    href="#">How it Works</a>
-                <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
-                    href="#">Restaurants</a>
-                <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
-                    href="#">For Companies</a>
-            </div>
-            <!-- Buttons -->
-            <div class="hidden md:flex items-center space-x-4">
-                <a class="text-primary hover:text-primary-dark font-semibold px-4 py-2 transition-colors" href="#">Log
-                    in</a>
-                <button
-                    class="bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-primary/30 transform hover:-translate-y-0.5">
-                    Sign Up
-                </button>
-            </div>
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden flex items-center">
-                <button class="text-slate-600 dark:text-gray-300 hover:text-primary">
-                    <span class="material-icons text-3xl">menu</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</nav>
+{% include 'partials/_navbar.html' %}
 <!-- Hero Section -->
 <header class="relative w-full h-[600px] lg:h-[700px] flex items-center justify-center overflow-hidden">
     <!-- Background Image with Overlay -->
@@ -70,16 +33,21 @@
                 lunches. One delivery, zero hassle.
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
-                <button
-                    class="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-xl shadow-primary/25 transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                    For Restaurants
-                    <span class="material-icons text-xl">restaurant_menu</span>
-                </button>
-                <button
-                    class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2">
-                    For Companies
-                    <span class="material-icons text-xl">business</span>
-                </button>
+                <a href="#">
+                    <!-- Add Restaurant Signup -->
+                    <button
+                        class="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-xl shadow-primary/25 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        For Restaurants
+                        <span class="material-icons text-xl">restaurant_menu</span>
+                    </button>
+                </a>
+                <a href="{% url 'signup' %}">
+                    <button
+                        class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2">
+                        For Companies
+                        <span class="material-icons text-xl">business</span>
+                    </button>
+                </a>
             </div>
             <div class="mt-12 flex items-center gap-4 text-sm text-gray-300 font-medium">
                 <div class="flex -space-x-2">
@@ -347,14 +315,18 @@
         <p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">Join hundreds of local companies enjoying better
             food, less hassle, and happier teams.</p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <button
-                class="bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-xl font-bold text-lg transition-all shadow-xl shadow-primary/30 transform hover:-translate-y-1">
-                Get Started for Free
-            </button>
-            <button
-                class="bg-transparent border border-slate-600 hover:bg-slate-800 text-white px-10 py-4 rounded-xl font-bold text-lg transition-all">
-                Contact Sales
-            </button>
+            <a href="{% url 'signup' %}">
+                <button
+                    class="bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-xl font-bold text-lg transition-all shadow-xl shadow-primary/30 transform hover:-translate-y-1">
+                    Get Started for Free
+                </button>
+            </a>
+            <a href="#">
+                <button
+                    class="bg-transparent border border-slate-600 hover:bg-slate-800 text-white px-10 py-4 rounded-xl font-bold text-lg transition-all">
+                    Contact Sales
+                </button>
+            </a>
         </div>
     </div>
 </section>
