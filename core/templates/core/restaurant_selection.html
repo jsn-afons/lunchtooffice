@@ -1,507 +1,474 @@
-<!DOCTYPE html>
+{% extends "core/base.html" %}
 
-<html lang="en">
+{% block title %}LunchToOffice - Restaurant Selection Dashboard{% endblock %}
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>LunchToOffice - Restaurant Selection Dashboard</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#e9590c",
-                        "primary-light": "#fed7aa", // Light orange for subtle backgrounds
-                        "background-light": "#f8f6f5",
-                        "background-dark": "#221610",
-                        "surface-light": "#ffffff",
-                        "surface-dark": "#2d1f18", // Slightly lighter than bg-dark
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
-                },
-            },
-        }
-    </script>
-</head>
+{% block body_class %}text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300
+{% endblock %}
 
-<body
-    class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display antialiased min-h-screen flex flex-col transition-colors duration-300">
-    <!-- Top Navigation -->
-    <nav
-        class="bg-surface-light dark:bg-surface-dark border-b border-orange-100 dark:border-orange-900/30 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <!-- Logo & Brand -->
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
-                        <span class="material-icons">lunch_dining</span>
-                    </div>
-                    <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">LunchTo<span
-                            class="text-primary">Office</span></span>
+{% block body %}
+<!-- Top Navigation -->
+<nav
+    class="bg-surface-light dark:bg-surface-dark border-b border-orange-100 dark:border-orange-900/30 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20">
+            <!-- Logo & Brand -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <span class="material-icons">lunch_dining</span>
                 </div>
-                <!-- Desktop Search -->
-                <div class="hidden md:flex flex-1 items-center justify-center px-8 lg:px-12">
-                    <div class="w-full max-w-lg relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span class="material-icons text-slate-400 dark:text-slate-500">search</span>
-                        </div>
-                        <input
-                            class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg bg-background-light dark:bg-background-dark text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-inner sm:text-sm"
-                            placeholder="Search for restaurants, cuisines, or dishes..." type="text" />
+                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">LunchTo<span
+                        class="text-primary">Office</span></span>
+            </div>
+            <!-- Desktop Search -->
+            <div class="hidden md:flex flex-1 items-center justify-center px-8 lg:px-12">
+                <div class="w-full max-w-lg relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="material-icons text-slate-400 dark:text-slate-500">search</span>
                     </div>
-                </div>
-                <!-- User & Actions -->
-                <div class="flex items-center gap-4">
-                    <button
-                        class="p-2 rounded-lg text-slate-500 hover:text-primary hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors relative">
-                        <span class="material-icons">notifications_none</span>
-                        <span
-                            class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full ring-2 ring-white dark:ring-surface-dark"></span>
-                    </button>
-                    <button
-                        class="p-2 rounded-lg text-slate-500 hover:text-primary hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors relative">
-                        <span class="material-icons">shopping_bag</span>
-                    </button>
-                    <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
-                    <div class="flex items-center gap-3 pl-1 cursor-pointer group">
-                        <div class="hidden sm:flex flex-col items-end">
-                            <span
-                                class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Alex
-                                Morgan</span>
-                            <span class="text-xs text-slate-500 dark:text-slate-400">Product Designer</span>
-                        </div>
-                        <div
-                            class="h-10 w-10 rounded-full bg-orange-100 dark:bg-orange-900/30 border-2 border-white dark:border-surface-dark shadow-sm overflow-hidden">
-                            <img alt="User Avatar" class="h-full w-full object-cover"
-                                data-alt="Portrait of a smiling man"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0UluZHww872QPXAOei6AVdqMZTKPc_iY1grzwr7G2fgB-CF72D9I5v54gOXWBmeE-hguJ9Pg3NVnt-kvf6M-tJEByIApkQKZKs7yRUlHZxIhyxD1KWed2PTZ6eA3NGzv2p0rlYcGvX6w5P8lnzZCewM57FEQt6g2PSZySKlSBgOUWLHD04zKYxWM4VrajeOSTl-1LLxdSHpOJ2b_Ka0eb9OxEOn_v6Mvwfd7_VU2s3qhO8qpvSJ73bcD59gLsUz87JJ2W-Vp-FxNM" />
-                        </div>
-                    </div>
+                    <input
+                        class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg bg-background-light dark:bg-background-dark text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-inner sm:text-sm"
+                        placeholder="Search for restaurants, cuisines, or dishes..." type="text" />
                 </div>
             </div>
-        </div>
-    </nav>
-    <!-- Main Content -->
-    <main class="flex-grow">
-        <!-- Hero / Greeting Section -->
-        <section
-            class="bg-surface-light dark:bg-surface-dark py-10 border-b border-orange-100 dark:border-orange-900/20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                    <div>
-                        <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">Good morning,
-                            Alex! <span class="text-3xl">👋</span></h1>
-                        <p class="text-slate-500 dark:text-slate-400 text-lg">Ready to fuel up? Here are today's top
-                            picks for the office.</p>
-                    </div>
-                    <!-- Quick Filters -->
-                    <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-                        <button
-                            class="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-primary/30 hover:bg-orange-700 transition-colors whitespace-nowrap">
-                            All Cuisines
-                        </button>
-                        <button
-                            class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors whitespace-nowrap">
-                            Healthy
-                        </button>
-                        <button
-                            class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors whitespace-nowrap">
-                            Asian
-                        </button>
-                        <button
-                            class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors whitespace-nowrap">
-                            Burgers
-                        </button>
-                        <button
-                            class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors whitespace-nowrap">
-                            Filter <span class="material-icons text-base align-middle ml-1">tune</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Restaurant Grid -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Card 1 -->
-                <div
-                    class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
-                    <div class="absolute top-3 right-3 z-10">
-                        <button
-                            class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
-                            <span class="material-icons text-lg">favorite_border</span>
-                        </button>
-                    </div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="Juicy gourmet burger with sesame bun"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Close up of a gourmet cheeseburger with lettuce and tomato"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8j7HWzn-HzAtBbEMN9xW2UsjFbEdFHSUiHvB-Iko569oDSNIU3rSOoIt1yBe-0WQ87EylH4_Wwd_ok4iITF9xaKXFtDntW1JnNpWc-rP9HqxOJGskceP5-0dwWrGxueSk7zYwmmiu21iGd-9OrVJdGT8MbohBLV0Kh0YHS5IiWQCXwHgmrPi4JSmK3VaRdKiStWsbP9hLKjtOfkYPo72lQlJ9Tcnlmdd39VbPaSm7nO0mtYnTGe6qhQNM7yAwvb-eC_fWC-pgMSEF" />
-                        <div
-                            class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
-                            <span class="material-icons text-primary text-xs">schedule</span> 25-35 min
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3
-                                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                                Burger Joint Downtown</h3>
-                            <div
-                                class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
-                                4.8 <span class="material-icons text-sm ml-0.5">star</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                            <span>American</span> • <span>Burgers</span> • <span
-                                class="text-slate-400 dark:text-slate-600">$$</span>
-                        </p>
-                        <div class="mt-auto">
-                            <button
-                                class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
-                                View Menu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div
-                    class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
-                    <div class="absolute top-3 right-3 z-10">
-                        <button
-                            class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
-                            <span class="material-icons text-lg">favorite_border</span>
-                        </button>
-                    </div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="Platter of fresh sushi rolls"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Colorful sushi rolls on a dark platter"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgXEWJNZLLpzq10cyoBTA1N9u7er0c54dZHtW4ZQSbRv6hMhaWWtjnRnHToAym1jxyKlhooAWLQD0U9BWHWWVS546mZbfl9GnimrHOfZD3rd6MfYVZuful-FKFtyYAnMPwjDBHKQ79y5sfk_Co59pJwxR4CeENnJoXVq5ZyIHGhk6zyaxd-_bk9toI1nzg5i_aPXvjxtPvr7ljyqoZEVW0wmufoTwsvbk0R58KRgX3UUS1tbJtIjez4D-HM9KeRqM8rAcGr9odT0aJ" />
-                        <div
-                            class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
-                            <span class="material-icons text-primary text-xs">schedule</span> 40-50 min
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3
-                                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                                Sakura Sushi</h3>
-                            <div
-                                class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
-                                4.9 <span class="material-icons text-sm ml-0.5">star</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                            <span>Japanese</span> • <span>Fresh Fish</span> • <span
-                                class="text-slate-400 dark:text-slate-600">$$$</span>
-                        </p>
-                        <div class="mt-auto">
-                            <button
-                                class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
-                                View Menu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div
-                    class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
-                    <div class="absolute top-3 right-3 z-10">
-                        <button
-                            class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
-                            <span class="material-icons text-lg">favorite_border</span>
-                        </button>
-                    </div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="Fresh green salad bowl with vegetables"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Top down view of a healthy salad bowl"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuASfqqL6GIGABTPZrtmfE1sd4zmGuK86ZUhEnwKlOqG3K_kM14RAo0hljscNQLcmXZC8rkHyg9Yyvri41NgfYclBh-V1nRveRHndnaiOmjRKuyAiHEDt4fo72pdj_hq_c9gC1LMaDwOxvEMIkCye9MXFir81b0DDGMfpSqDjSjc6rUfazOGiHYnhr07v_b3i4BGozaTL_FCpf3iUbk13WZvlkDRDtob_fkf36X7iRmPFqelItP-J1YIEOt5Y9NnIT__6oLUFrzPooDM" />
-                        <div
-                            class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
-                            <span class="material-icons text-primary text-xs">schedule</span> 15-25 min
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3
-                                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                                Green Leaf</h3>
-                            <div
-                                class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
-                                4.5 <span class="material-icons text-sm ml-0.5">star</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                            <span>Healthy</span> • <span>Vegan</span> • <span
-                                class="text-slate-400 dark:text-slate-600">$$</span>
-                        </p>
-                        <div class="mt-auto">
-                            <button
-                                class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
-                                View Menu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div
-                    class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
-                    <div class="absolute top-3 right-3 z-10">
-                        <button
-                            class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
-                            <span class="material-icons text-lg">favorite_border</span>
-                        </button>
-                    </div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="Slices of pepperoni pizza"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Freshly baked pepperoni pizza slices"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuADWPhz6ho_LxVoDB97pS3PR-BxIhhtxWe-ZTZxa6scKqT4pmtswKCysooOoC-sfENiVjaZ3DpZI82tjMcbvA06FpdKWN_QsKbAcvXiavVy5Mdlq1nXtFrKt-LwgW6QMt1Kx2tM5ZCCMwqZHIVhZy_JQTLTU5trwHdE5HDxjMSkCMjQbfl9Kv0aLAYvf2tmRe-0b00xOgZ82bziToLCIj_f6TsbghARp3A5qCxkJjcyMEjhaUeS0oJImIXSiGZijlPE-vgp92Lde4Id" />
-                        <div
-                            class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
-                            <span class="material-icons text-primary text-xs">schedule</span> 30-40 min
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3
-                                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                                Mama's Pizzeria</h3>
-                            <div
-                                class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
-                                4.7 <span class="material-icons text-sm ml-0.5">star</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                            <span>Italian</span> • <span>Pizza</span> • <span
-                                class="text-slate-400 dark:text-slate-600">$</span>
-                        </p>
-                        <div class="mt-auto">
-                            <button
-                                class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
-                                View Menu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 5 -->
-                <div
-                    class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
-                    <div class="absolute top-3 right-3 z-10">
-                        <button
-                            class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
-                            <span class="material-icons text-lg">favorite_border</span>
-                        </button>
-                    </div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="Assorted tacos on a wooden board"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Plate with three different street tacos"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAibsGiifovrktuLgQkUr_iMboAI5-ycDBMPws67omnObUVz6fUH1_3KbpFzu1_O0qFz6OHXUr28hiq1aJKDQvhfjoTVBPw7e892IuKnQPuB3rNgxxoDDiWbsgSQoBfOYNBHc_ojCtDSWefMYpcgTjH5jTFKowpAPhUZPBIj6c5p3YKj__uofkdxm5bezL3BArxlUA3G6d2GCpk2_FKM-C9vlxUkCobMr9dDIHhY_Kf0N84vlVjXkeomEEyEykV2rrh5KRb5iafDZeg" />
-                        <div
-                            class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
-                            <span class="material-icons text-primary text-xs">schedule</span> 20-30 min
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3
-                                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                                Taco Street</h3>
-                            <div
-                                class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
-                                4.6 <span class="material-icons text-sm ml-0.5">star</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                            <span>Mexican</span> • <span>Tacos</span> • <span
-                                class="text-slate-400 dark:text-slate-600">$</span>
-                        </p>
-                        <div class="mt-auto">
-                            <button
-                                class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
-                                View Menu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 6 -->
-                <div
-                    class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
-                    <div class="absolute top-3 right-3 z-10">
-                        <button
-                            class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
-                            <span class="material-icons text-lg">favorite_border</span>
-                        </button>
-                    </div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="Donuts with colorful icing"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Box of assorted colorful donuts"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnWipxDZ0368QZuUY881_PJ7jVXdFNORCNjAYQNLK7y-dEjfYf8fK4gXU_qrpj153x2egKSBqqXZn7TQn3LZgNvWAzmNjfC5cTVDlwcSZKm-cBPVZfelQoS_ioQ4M6THkxFu4It5HKY-S6asnzhqkUgYjYslViYld90qc0WIk9MUFTi08h89lH-1jA5uDuuLVTIBnRXxaDWElthvzQwrGeg83GdGwJV4PFNEv2pUZWLZm4dsNLV6tmPs6nP10IP39x3RsP9x9trAGm" />
-                        <div
-                            class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
-                            <span class="material-icons text-primary text-xs">schedule</span> 10-20 min
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3
-                                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                                Sugar Rush</h3>
-                            <div
-                                class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
-                                4.9 <span class="material-icons text-sm ml-0.5">star</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                            <span>Dessert</span> • <span>Bakery</span> • <span
-                                class="text-slate-400 dark:text-slate-600">$$</span>
-                        </p>
-                        <div class="mt-auto">
-                            <button
-                                class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
-                                View Menu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 7 -->
-                <div
-                    class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
-                    <div class="absolute top-3 right-3 z-10">
-                        <button
-                            class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
-                            <span class="material-icons text-lg">favorite_border</span>
-                        </button>
-                    </div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="Spicy indian curry bowl"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Rich red indian chicken curry in a bowl"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuChZFElDld3aXgBeslPdNQx3kMzQ05FhCJyvJS33G7kVhQogYEygDjabYxMqUC4VOW6Ahb8my8o6EEq7zfKxewens4HPLMzgY0NhpjGo_FfvIwcuB3I2r3ZWPZ20kARAPZOC-aY9A3qEDvSxVDKauTVr38XAMo1mJvZXxzvvDclrsqkCrJLQ8yWnewkOHmNtPADMMdgu_EwpbGtky6yQx_HdJPhG-bXljZ8i332i0P4pAGptcIC8QmqbELp_4CUkev6Z6YYN1zE3kfT" />
-                        <div
-                            class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
-                            <span class="material-icons text-primary text-xs">schedule</span> 35-45 min
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3
-                                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                                Curry House</h3>
-                            <div
-                                class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
-                                4.4 <span class="material-icons text-sm ml-0.5">star</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                            <span>Indian</span> • <span>Spicy</span> • <span
-                                class="text-slate-400 dark:text-slate-600">$$</span>
-                        </p>
-                        <div class="mt-auto">
-                            <button
-                                class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
-                                View Menu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 8 -->
-                <div
-                    class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
-                    <div class="absolute top-3 right-3 z-10">
-                        <button
-                            class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
-                            <span class="material-icons text-lg">favorite_border</span>
-                        </button>
-                    </div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="Grilled steak with vegetables"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Grilled steak served with asparagus and tomatoes"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvjvX5sdwRsko3N0lrhtLb2cl-vKh-SpQGGgHxtismmEIY3LrJiYLTw0_CGgfYIJT4xlysPZbqrYgLgb1KgGJhyifb3NXQEecQWArjJgcUNz5AN6RN65cNDiEx32fyC4h77h84OBreKWRcot6DaN260w2WFRbFNY7TO4WgaoZ4m0Az4iP_WVb-OIAIsRYaWQiQzPCNxHtggyURBv0GdVAgfxXRtBdnhLI7KJaG76WYs56KK9L5RZ7wpzmIGJ0kx8P1VechHguL1Nb0" />
-                        <div
-                            class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
-                            <span class="material-icons text-primary text-xs">schedule</span> 45-55 min
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3
-                                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                                The Grill House</h3>
-                            <div
-                                class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
-                                4.7 <span class="material-icons text-sm ml-0.5">star</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                            <span>Steakhouse</span> • <span>Grill</span> • <span
-                                class="text-slate-400 dark:text-slate-600">$$$</span>
-                        </p>
-                        <div class="mt-auto">
-                            <button
-                                class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
-                                View Menu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Load More -->
-            <div class="mt-12 flex justify-center">
+            <!-- User & Actions -->
+            <div class="flex items-center gap-4">
                 <button
-                    class="flex items-center gap-2 px-6 py-3 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors shadow-sm">
-                    Show more restaurants <span class="material-icons text-sm">expand_more</span>
+                    class="p-2 rounded-lg text-slate-500 hover:text-primary hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors relative">
+                    <span class="material-icons">notifications_none</span>
+                    <span
+                        class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full ring-2 ring-white dark:ring-surface-dark"></span>
                 </button>
-            </div>
-        </section>
-    </main>
-    <!-- Footer -->
-    <footer class="bg-surface-light dark:bg-surface-dark border-t border-orange-100 dark:border-orange-900/20 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <p class="text-sm text-slate-500 dark:text-slate-400">
-                        © 2023 LunchToOffice. Tasty lunches for busy days.
-                    </p>
-                </div>
-                <div class="flex gap-6 text-sm font-medium text-slate-500 dark:text-slate-400">
-                    <a class="hover:text-primary transition-colors" href="#">About Us</a>
-                    <a class="hover:text-primary transition-colors" href="#">For Restaurants</a>
-                    <a class="hover:text-primary transition-colors" href="#">Support</a>
-                    <a class="hover:text-primary transition-colors" href="#">Privacy</a>
+                <button
+                    class="p-2 rounded-lg text-slate-500 hover:text-primary hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors relative">
+                    <span class="material-icons">shopping_bag</span>
+                </button>
+                <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+                <div class="flex items-center gap-3 pl-1 cursor-pointer group">
+                    <div class="hidden sm:flex flex-col items-end">
+                        <span
+                            class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Alex
+                            Morgan</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400">Product Designer</span>
+                    </div>
+                    <div
+                        class="h-10 w-10 rounded-full bg-orange-100 dark:bg-orange-900/30 border-2 border-white dark:border-surface-dark shadow-sm overflow-hidden">
+                        <img alt="User Avatar" class="h-full w-full object-cover" data-alt="Portrait of a smiling man"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0UluZHww872QPXAOei6AVdqMZTKPc_iY1grzwr7G2fgB-CF72D9I5v54gOXWBmeE-hguJ9Pg3NVnt-kvf6M-tJEByIApkQKZKs7yRUlHZxIhyxD1KWed2PTZ6eA3NGzv2p0rlYcGvX6w5P8lnzZCewM57FEQt6g2PSZySKlSBgOUWLHD04zKYxWM4VrajeOSTl-1LLxdSHpOJ2b_Ka0eb9OxEOn_v6Mvwfd7_VU2s3qhO8qpvSJ73bcD59gLsUz87JJ2W-Vp-FxNM" />
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- Dark Mode Toggle Script (Simulated) -->
-    <script>
-        // Simple script to toggle dark mode for demonstration
-        // In a real app, this would be more robust and persistent
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check system preference
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.classList.add('dark');
-            }
-        });
-    </script>
-</body>
+    </div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow">
+    <!-- Hero / Greeting Section -->
+    <section class="bg-surface-light dark:bg-surface-dark py-10 border-b border-orange-100 dark:border-orange-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">Good morning,
+                        Alex! <span class="text-3xl">👋</span></h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-lg">Ready to fuel up? Here are today's top
+                        picks for the office.</p>
+                </div>
+                <!-- Quick Filters -->
+                <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+                    <button
+                        class="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-primary/30 hover:bg-orange-700 transition-colors whitespace-nowrap">
+                        All Cuisines
+                    </button>
+                    <button
+                        class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors whitespace-nowrap">
+                        Healthy
+                    </button>
+                    <button
+                        class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors whitespace-nowrap">
+                        Asian
+                    </button>
+                    <button
+                        class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors whitespace-nowrap">
+                        Burgers
+                    </button>
+                    <button
+                        class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors whitespace-nowrap">
+                        Filter <span class="material-icons text-base align-middle ml-1">tune</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Restaurant Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Card 1 -->
+            <div
+                class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
+                <div class="absolute top-3 right-3 z-10">
+                    <button
+                        class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-icons text-lg">favorite_border</span>
+                    </button>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img alt="Juicy gourmet burger with sesame bun"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="Close up of a gourmet cheeseburger with lettuce and tomato"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8j7HWzn-HzAtBbEMN9xW2UsjFbEdFHSUiHvB-Iko569oDSNIU3rSOoIt1yBe-0WQ87EylH4_Wwd_ok4iITF9xaKXFtDntW1JnNpWc-rP9HqxOJGskceP5-0dwWrGxueSk7zYwmmiu21iGd-9OrVJdGT8MbohBLV0Kh0YHS5IiWQCXwHgmrPi4JSmK3VaRdKiStWsbP9hLKjtOfkYPo72lQlJ9Tcnlmdd39VbPaSm7nO0mtYnTGe6qhQNM7yAwvb-eC_fWC-pgMSEF" />
+                    <div
+                        class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
+                        <span class="material-icons text-primary text-xs">schedule</span> 25-35 min
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3
+                            class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            Burger Joint Downtown</h3>
+                        <div
+                            class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
+                            4.8 <span class="material-icons text-sm ml-0.5">star</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+                        <span>American</span> • <span>Burgers</span> • <span
+                            class="text-slate-400 dark:text-slate-600">$$</span>
+                    </p>
+                    <div class="mt-auto">
+                        <button
+                            class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
+                            View Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div
+                class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
+                <div class="absolute top-3 right-3 z-10">
+                    <button
+                        class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-icons text-lg">favorite_border</span>
+                    </button>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img alt="Platter of fresh sushi rolls"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="Colorful sushi rolls on a dark platter"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgXEWJNZLLpzq10cyoBTA1N9u7er0c54dZHtW4ZQSbRv6hMhaWWtjnRnHToAym1jxyKlhooAWLQD0U9BWHWWVS546mZbfl9GnimrHOfZD3rd6MfYVZuful-FKFtyYAnMPwjDBHKQ79y5sfk_Co59pJwxR4CeENnJoXVq5ZyIHGhk6zyaxd-_bk9toI1nzg5i_aPXvjxtPvr7ljyqoZEVW0wmufoTwsvbk0R58KRgX3UUS1tbJtIjez4D-HM9KeRqM8rAcGr9odT0aJ" />
+                    <div
+                        class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
+                        <span class="material-icons text-primary text-xs">schedule</span> 40-50 min
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3
+                            class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            Sakura Sushi</h3>
+                        <div
+                            class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
+                            4.9 <span class="material-icons text-sm ml-0.5">star</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+                        <span>Japanese</span> • <span>Fresh Fish</span> • <span
+                            class="text-slate-400 dark:text-slate-600">$$$</span>
+                    </p>
+                    <div class="mt-auto">
+                        <button
+                            class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
+                            View Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div
+                class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
+                <div class="absolute top-3 right-3 z-10">
+                    <button
+                        class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-icons text-lg">favorite_border</span>
+                    </button>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img alt="Fresh green salad bowl with vegetables"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="Top down view of a healthy salad bowl"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuASfqqL6GIGABTPZrtmfE1sd4zmGuK86ZUhEnwKlOqG3K_kM14RAo0hljscNQLcmXZC8rkHyg9Yyvri41NgfYclBh-V1nRveRHndnaiOmjRKuyAiHEDt4fo72pdj_hq_c9gC1LMaDwOxvEMIkCye9MXFir81b0DDGMfpSqDjSjc6rUfazOGiHYnhr07v_b3i4BGozaTL_FCpf3iUbk13WZvlkDRDtob_fkf36X7iRmPFqelItP-J1YIEOt5Y9NnIT__6oLUFrzPooDM" />
+                    <div
+                        class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
+                        <span class="material-icons text-primary text-xs">schedule</span> 15-25 min
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3
+                            class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            Green Leaf</h3>
+                        <div
+                            class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
+                            4.5 <span class="material-icons text-sm ml-0.5">star</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+                        <span>Healthy</span> • <span>Vegan</span> • <span
+                            class="text-slate-400 dark:text-slate-600">$$</span>
+                    </p>
+                    <div class="mt-auto">
+                        <button
+                            class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
+                            View Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div
+                class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
+                <div class="absolute top-3 right-3 z-10">
+                    <button
+                        class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-icons text-lg">favorite_border</span>
+                    </button>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img alt="Slices of pepperoni pizza"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="Freshly baked pepperoni pizza slices"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuADWPhz6ho_LxVoDB97pS3PR-BxIhhtxWe-ZTZxa6scKqT4pmtswKCysooOoC-sfENiVjaZ3DpZI82tjMcbvA06FpdKWN_QsKbAcvXiavVy5Mdlq1nXtFrKt-LwgW6QMt1Kx2tM5ZCCMwqZHIVhZy_JQTLTU5trwHdE5HDxjMSkCMjQbfl9Kv0aLAYvf2tmRe-0b00xOgZ82bziToLCIj_f6TsbghARp3A5qCxkJjcyMEjhaUeS0oJImIXSiGZijlPE-vgp92Lde4Id" />
+                    <div
+                        class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
+                        <span class="material-icons text-primary text-xs">schedule</span> 30-40 min
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3
+                            class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            Mama's Pizzeria</h3>
+                        <div
+                            class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
+                            4.7 <span class="material-icons text-sm ml-0.5">star</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+                        <span>Italian</span> • <span>Pizza</span> • <span
+                            class="text-slate-400 dark:text-slate-600">$</span>
+                    </p>
+                    <div class="mt-auto">
+                        <button
+                            class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
+                            View Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div
+                class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
+                <div class="absolute top-3 right-3 z-10">
+                    <button
+                        class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-icons text-lg">favorite_border</span>
+                    </button>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img alt="Assorted tacos on a wooden board"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="Plate with three different street tacos"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAibsGiifovrktuLgQkUr_iMboAI5-ycDBMPws67omnObUVz6fUH1_3KbpFzu1_O0qFz6OHXUr28hiq1aJKDQvhfjoTVBPw7e892IuKnQPuB3rNgxxoDDiWbsgSQoBfOYNBHc_ojCtDSWefMYpcgTjH5jTFKowpAPhUZPBIj6c5p3YKj__uofkdxm5bezL3BArxlUA3G6d2GCpk2_FKM-C9vlxUkCobMr9dDIHhY_Kf0N84vlVjXkeomEEyEykV2rrh5KRb5iafDZeg" />
+                    <div
+                        class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
+                        <span class="material-icons text-primary text-xs">schedule</span> 20-30 min
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3
+                            class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            Taco Street</h3>
+                        <div
+                            class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
+                            4.6 <span class="material-icons text-sm ml-0.5">star</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+                        <span>Mexican</span> • <span>Tacos</span> • <span
+                            class="text-slate-400 dark:text-slate-600">$</span>
+                    </p>
+                    <div class="mt-auto">
+                        <button
+                            class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
+                            View Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div
+                class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
+                <div class="absolute top-3 right-3 z-10">
+                    <button
+                        class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-icons text-lg">favorite_border</span>
+                    </button>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img alt="Donuts with colorful icing"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="Box of assorted colorful donuts"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnWipxDZ0368QZuUY881_PJ7jVXdFNORCNjAYQNLK7y-dEjfYf8fK4gXU_qrpj153x2egKSBqqXZn7TQn3LZgNvWAzmNjfC5cTVDlwcSZKm-cBPVZfelQoS_ioQ4M6THkxFu4It5HKY-S6asnzhqkUgYjYslViYld90qc0WIk9MUFTi08h89lH-1jA5uDuuLVTIBnRXxaDWElthvzQwrGeg83GdGwJV4PFNEv2pUZWLZm4dsNLV6tmPs6nP10IP39x3RsP9x9trAGm" />
+                    <div
+                        class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
+                        <span class="material-icons text-primary text-xs">schedule</span> 10-20 min
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3
+                            class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            Sugar Rush</h3>
+                        <div
+                            class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
+                            4.9 <span class="material-icons text-sm ml-0.5">star</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+                        <span>Dessert</span> • <span>Bakery</span> • <span
+                            class="text-slate-400 dark:text-slate-600">$$</span>
+                    </p>
+                    <div class="mt-auto">
+                        <button
+                            class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
+                            View Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 7 -->
+            <div
+                class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
+                <div class="absolute top-3 right-3 z-10">
+                    <button
+                        class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-icons text-lg">favorite_border</span>
+                    </button>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img alt="Spicy indian curry bowl"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="Rich red indian chicken curry in a bowl"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuChZFElDld3aXgBeslPdNQx3kMzQ05FhCJyvJS33G7kVhQogYEygDjabYxMqUC4VOW6Ahb8my8o6EEq7zfKxewens4HPLMzgY0NhpjGo_FfvIwcuB3I2r3ZWPZ20kARAPZOC-aY9A3qEDvSxVDKauTVr38XAMo1mJvZXxzvvDclrsqkCrJLQ8yWnewkOHmNtPADMMdgu_EwpbGtky6yQx_HdJPhG-bXljZ8i332i0P4pAGptcIC8QmqbELp_4CUkev6Z6YYN1zE3kfT" />
+                    <div
+                        class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
+                        <span class="material-icons text-primary text-xs">schedule</span> 35-45 min
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3
+                            class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            Curry House</h3>
+                        <div
+                            class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
+                            4.4 <span class="material-icons text-sm ml-0.5">star</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+                        <span>Indian</span> • <span>Spicy</span> • <span
+                            class="text-slate-400 dark:text-slate-600">$$</span>
+                    </p>
+                    <div class="mt-auto">
+                        <button
+                            class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
+                            View Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 8 -->
+            <div
+                class="group bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 relative">
+                <div class="absolute top-3 right-3 z-10">
+                    <button
+                        class="w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-icons text-lg">favorite_border</span>
+                    </button>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img alt="Grilled steak with vegetables"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="Grilled steak served with asparagus and tomatoes"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvjvX5sdwRsko3N0lrhtLb2cl-vKh-SpQGGgHxtismmEIY3LrJiYLTw0_CGgfYIJT4xlysPZbqrYgLgb1KgGJhyifb3NXQEecQWArjJgcUNz5AN6RN65cNDiEx32fyC4h77h84OBreKWRcot6DaN260w2WFRbFNY7TO4WgaoZ4m0Az4iP_WVb-OIAIsRYaWQiQzPCNxHtggyURBv0GdVAgfxXRtBdnhLI7KJaG76WYs56KK9L5RZ7wpzmIGJ0kx8P1VechHguL1Nb0" />
+                    <div
+                        class="absolute bottom-2 left-2 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 shadow-sm">
+                        <span class="material-icons text-primary text-xs">schedule</span> 45-55 min
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3
+                            class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            The Grill House</h3>
+                        <div
+                            class="flex items-center bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 rounded text-sm font-bold text-primary">
+                            4.7 <span class="material-icons text-sm ml-0.5">star</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+                        <span>Steakhouse</span> • <span>Grill</span> • <span
+                            class="text-slate-400 dark:text-slate-600">$$$</span>
+                    </p>
+                    <div class="mt-auto">
+                        <button
+                            class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:border-primary hover:bg-primary hover:text-white transition-all duration-200">
+                            View Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Load More -->
+        <div class="mt-12 flex justify-center">
+            <button
+                class="flex items-center gap-2 px-6 py-3 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium hover:border-primary hover:text-primary dark:hover:text-primary transition-colors shadow-sm">
+                Show more restaurants <span class="material-icons text-sm">expand_more</span>
+            </button>
+        </div>
+    </section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-light dark:bg-surface-dark border-t border-orange-100 dark:border-orange-900/20 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                    © 2023 LunchToOffice. Tasty lunches for busy days.
+                </p>
+            </div>
+            <div class="flex gap-6 text-sm font-medium text-slate-500 dark:text-slate-400">
+                <a class="hover:text-primary transition-colors" href="#">About Us</a>
+                <a class="hover:text-primary transition-colors" href="#">For Restaurants</a>
+                <a class="hover:text-primary transition-colors" href="#">Support</a>
+                <a class="hover:text-primary transition-colors" href="#">Privacy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}
 
-</html>
+{% block scripts %}
+<!-- Dark Mode Toggle Script (Simulated) -->
+<script>
+    // Simple script to toggle dark mode for demonstration
+    // In a real app, this would be more robust and persistent
+    document.addEventListener('DOMContentLoaded', () => {
+        // Check system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+    });
+</script>
+{% endblock %}

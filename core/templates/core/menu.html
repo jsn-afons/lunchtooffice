@@ -1,485 +1,436 @@
-<!DOCTYPE html>
+{% extends "core/base.html" %}
 
-<html class="scroll-smooth" lang="en">
+{% block title %}LunchToOffice - Menu & Cart{% endblock %}
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>LunchToOffice - Menu &amp; Cart</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#e9590c",
-                        "background-light": "#f8f6f5",
-                        "background-dark": "#221610",
-                        // Neutrals derived from primary hue (orange/warm)
-                        "neutral-50": "#fafaf9",
-                        "neutral-100": "#f5f5f4",
-                        "neutral-200": "#e7e5e4",
-                        "neutral-300": "#d6d3d1",
-                        "neutral-400": "#a8a29e",
-                        "neutral-500": "#78716c",
-                        "neutral-600": "#57534e",
-                        "neutral-700": "#44403c",
-                        "neutral-800": "#292524",
-                        "neutral-900": "#1c1917",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
-                },
-            },
-        }
-    </script>
-    <style>
-        /* Custom scrollbar for webkit */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+{% block styles %}
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+width: 8px;
+}
 
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
+::-webkit-scrollbar-track {
+background: transparent;
+}
 
-        ::-webkit-scrollbar-thumb {
-            background: #d6d3d1;
-            border-radius: 4px;
-        }
+::-webkit-scrollbar-thumb {
+background: #d6d3d1;
+border-radius: 4px;
+}
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a29e;
-        }
+::-webkit-scrollbar-thumb:hover {
+background: #a8a29e;
+}
 
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
+.hide-scrollbar::-webkit-scrollbar {
+display: none;
+}
 
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
-</head>
+.hide-scrollbar {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+{% endblock %}
 
-<body
-    class="bg-background-light dark:bg-background-dark text-neutral-800 dark:text-neutral-100 font-display antialiased min-h-screen flex flex-col">
-    <!-- Navbar -->
-    <header
-        class="sticky top-0 z-50 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex items-center gap-2">
-                    <div class="bg-primary/10 p-2 rounded-lg">
-                        <span class="material-icons text-primary">lunch_dining</span>
-                    </div>
-                    <span class="font-bold text-xl tracking-tight text-neutral-900 dark:text-white">LunchTo<span
-                            class="text-primary">Office</span></span>
+{% block body_class %}text-neutral-800 dark:text-neutral-100 min-h-screen flex flex-col{% endblock %}
+
+{% block body %}
+<!-- Navbar -->
+<header
+    class="sticky top-0 z-50 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <div class="bg-primary/10 p-2 rounded-lg">
+                    <span class="material-icons text-primary">lunch_dining</span>
                 </div>
-                <!-- Center Nav -->
-                <nav class="hidden md:flex space-x-8">
-                    <a class="text-primary font-medium border-b-2 border-primary px-1 pb-4 -mb-4" href="#">Tuesday
-                        Menu</a>
-                    <a class="text-neutral-500 dark:text-neutral-400 hover:text-primary transition-colors px-1 font-medium"
-                        href="#">My Orders</a>
-                    <a class="text-neutral-500 dark:text-neutral-400 hover:text-primary transition-colors px-1 font-medium"
-                        href="#">History</a>
-                </nav>
-                <!-- Right Actions -->
-                <div class="flex items-center gap-4">
-                    <div class="hidden md:flex flex-col items-end text-sm">
-                        <span class="text-neutral-400 dark:text-neutral-500 text-xs uppercase font-semibold">Deliver
-                            to</span>
-                        <span class="font-medium">Accra Office, Floor 3</span>
-                    </div>
-                    <button class="flex items-center gap-2 pl-4 border-l border-neutral-200 dark:border-neutral-700">
-                        <img alt="User profile"
-                            class="h-9 w-9 rounded-full ring-2 ring-white dark:ring-neutral-800 object-cover"
-                            data-alt="Portrait of a smiling man"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBJUE_pE39MQQopF0dfFAIjGLkrvyGh6lWLQ3x8iG1uPWcTt_xrSn95Yy493AyudHSCQ0nTqrKpW_I9BK_wwxZIgAiEryQZaq6ER7cFpZ5XEWTlnwKjswfWnOet7ywz4rtC3_ryUGUa1DwuLqT95ChJceTxk5yj2h6JwoVPmHg5jzfRc0d_WL4yk6Q32VImcPk5aNCJQu180rR2FsAnpHxesRmcyAzKRYmCqw_FC5H7ZxUeOSnEGD3-eef6glpMgVeZ6C5IoMZcmPD" />
-                    </button>
+                <span class="font-bold text-xl tracking-tight text-neutral-900 dark:text-white">LunchTo<span
+                        class="text-primary">Office</span></span>
+            </div>
+            <!-- Center Nav -->
+            <nav class="hidden md:flex space-x-8">
+                <a class="text-primary font-medium border-b-2 border-primary px-1 pb-4 -mb-4" href="#">Tuesday
+                    Menu</a>
+                <a class="text-neutral-500 dark:text-neutral-400 hover:text-primary transition-colors px-1 font-medium"
+                    href="#">My Orders</a>
+                <a class="text-neutral-500 dark:text-neutral-400 hover:text-primary transition-colors px-1 font-medium"
+                    href="#">History</a>
+            </nav>
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex flex-col items-end text-sm">
+                    <span class="text-neutral-400 dark:text-neutral-500 text-xs uppercase font-semibold">Deliver
+                        to</span>
+                    <span class="font-medium">Accra Office, Floor 3</span>
                 </div>
+                <button class="flex items-center gap-2 pl-4 border-l border-neutral-200 dark:border-neutral-700">
+                    <img alt="User profile"
+                        class="h-9 w-9 rounded-full ring-2 ring-white dark:ring-neutral-800 object-cover"
+                        data-alt="Portrait of a smiling man"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBJUE_pE39MQQopF0dfFAIjGLkrvyGh6lWLQ3x8iG1uPWcTt_xrSn95Yy493AyudHSCQ0nTqrKpW_I9BK_wwxZIgAiEryQZaq6ER7cFpZ5XEWTlnwKjswfWnOet7ywz4rtC3_ryUGUa1DwuLqT95ChJceTxk5yj2h6JwoVPmHg5jzfRc0d_WL4yk6Q32VImcPk5aNCJQu180rR2FsAnpHxesRmcyAzKRYmCqw_FC5H7ZxUeOSnEGD3-eef6glpMgVeZ6C5IoMZcmPD" />
+                </button>
             </div>
         </div>
-    </header>
-    <!-- Main Content -->
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <!-- Left Column: Menu (70% on desktop -> col-span-8) -->
-        <div class="lg:col-span-8 space-y-8">
-            <!-- Category Filter Sticky Bar -->
-            <div
-                class="sticky top-20 z-40 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur py-2 -mx-2 px-2">
-                <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
-                    <button
-                        class="bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-primary/30 whitespace-nowrap transition-transform hover:scale-105">
-                        All Items
-                    </button>
-                    <button
-                        class="bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary px-5 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-700 whitespace-nowrap transition-colors">
-                        Main Dishes
-                    </button>
-                    <button
-                        class="bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary px-5 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-700 whitespace-nowrap transition-colors">
-                        Soups &amp; Stews
-                    </button>
-                    <button
-                        class="bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary px-5 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-700 whitespace-nowrap transition-colors">
-                        Sides
-                    </button>
-                    <button
-                        class="bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary px-5 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-700 whitespace-nowrap transition-colors">
-                        Drinks
-                    </button>
-                </div>
+    </div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Left Column: Menu (70% on desktop -> col-span-8) -->
+    <div class="lg:col-span-8 space-y-8">
+        <!-- Category Filter Sticky Bar -->
+        <div class="sticky top-20 z-40 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur py-2 -mx-2 px-2">
+            <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+                <button
+                    class="bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-primary/30 whitespace-nowrap transition-transform hover:scale-105">
+                    All Items
+                </button>
+                <button
+                    class="bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary px-5 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-700 whitespace-nowrap transition-colors">
+                    Main Dishes
+                </button>
+                <button
+                    class="bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary px-5 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-700 whitespace-nowrap transition-colors">
+                    Soups &amp; Stews
+                </button>
+                <button
+                    class="bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary px-5 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-700 whitespace-nowrap transition-colors">
+                    Sides
+                </button>
+                <button
+                    class="bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary px-5 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-700 whitespace-nowrap transition-colors">
+                    Drinks
+                </button>
             </div>
-            <!-- Promotional Banner -->
-            <div
-                class="relative overflow-hidden rounded-xl bg-gradient-to-r from-neutral-800 to-neutral-900 dark:from-neutral-700 dark:to-neutral-900 text-white shadow-xl">
+        </div>
+        <!-- Promotional Banner -->
+        <div
+            class="relative overflow-hidden rounded-xl bg-gradient-to-r from-neutral-800 to-neutral-900 dark:from-neutral-700 dark:to-neutral-900 text-white shadow-xl">
+            <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/food.png')]">
+            </div>
+            <div class="relative z-10 flex flex-col md:flex-row items-center p-6 md:p-8 gap-6">
+                <div class="flex-1">
+                    <span
+                        class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full mb-3 uppercase tracking-wider border border-primary/20">Special
+                        Offer</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2">Order by 11 AM</h2>
+                    <p class="text-neutral-300 mb-4 text-sm md:text-base">Get free delivery to all offices in the
+                        Ridge area. Don't miss out on today's Jollof special!</p>
+                </div>
+                <img alt="Delicious salad bowl"
+                    class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white/10 shadow-lg"
+                    data-alt="Healthy fresh salad bowl top view"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuTh6S6k9LW4jBQiabTjfbXyD2PMHHhU3fPrg4pdMBCITR82WuSAQgMhavWNOnafS0O07nXrX0hzyP8iT7jlWMNf_vHRiR6W6ECQnrnKdLV5Bg-Ph2tmiIqR79Fl-E0AVveP99lrNCLv3qHHtIA9zcLvP0lFa_k6Ts6RbVj0pvbh3qhV4QBTGSm6bbaB4kg4beFHGV3JO0FYOjdrEd_fHy1daFZzR_WlJQnfWbxx6LhCt6tf_fW-Zy0g3SZPF6rrt_Av1wAgTTLCST" />
+            </div>
+        </div>
+        <!-- Menu Section: Main Dishes -->
+        <section id="main-dishes">
+            <div class="flex items-center gap-3 mb-6">
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white">Main Dishes</h3>
+                <div class="h-px flex-grow bg-neutral-200 dark:bg-neutral-800"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Item Card 1 -->
                 <div
-                    class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/food.png')]">
-                </div>
-                <div class="relative z-10 flex flex-col md:flex-row items-center p-6 md:p-8 gap-6">
-                    <div class="flex-1">
-                        <span
-                            class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full mb-3 uppercase tracking-wider border border-primary/20">Special
-                            Offer</span>
-                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Order by 11 AM</h2>
-                        <p class="text-neutral-300 mb-4 text-sm md:text-base">Get free delivery to all offices in the
-                            Ridge area. Don't miss out on today's Jollof special!</p>
+                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
+                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
+                        <img alt="Jollof Rice"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Spicy Jollof rice with chicken"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgBSw1HQR9PhrBup4XXKx6HtnErsmV3v4DdqeXjqH69eaOprdL0GfGChRzY6mhqtdiLNulRNxMHo-mlQx_23ujq1oawFdf1LMqDJb6bZtAOd9ZExJiPXjF-Lbn3ebOYRxmBDhRk-Lv_1wGYO5UKT0J1_O_yMFGjWEjHeLjgd8gg4VNIsr4zv7wONzAsrv1aoKN-Aeaseh8wlLjMQgJFIac865qkTXS_KozAlhHwdb_zFU6M-q4fqnEomgUhrAnTkwDYctfMjIZxKNj" />
+                        <div
+                            class="absolute top-1 right-1 bg-white/90 dark:bg-black/80 text-[10px] font-bold px-1.5 py-0.5 rounded text-neutral-600 dark:text-neutral-300 shadow-sm">
+                            Hot
+                        </div>
                     </div>
-                    <img alt="Delicious salad bowl"
-                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white/10 shadow-lg"
-                        data-alt="Healthy fresh salad bowl top view"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuTh6S6k9LW4jBQiabTjfbXyD2PMHHhU3fPrg4pdMBCITR82WuSAQgMhavWNOnafS0O07nXrX0hzyP8iT7jlWMNf_vHRiR6W6ECQnrnKdLV5Bg-Ph2tmiIqR79Fl-E0AVveP99lrNCLv3qHHtIA9zcLvP0lFa_k6Ts6RbVj0pvbh3qhV4QBTGSm6bbaB4kg4beFHGV3JO0FYOjdrEd_fHy1daFZzR_WlJQnfWbxx6LhCt6tf_fW-Zy0g3SZPF6rrt_Av1wAgTTLCST" />
+                    <div class="flex flex-col justify-between flex-grow py-1">
+                        <div>
+                            <h4
+                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
+                                Jollof Rice &amp; Chicken</h4>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Smoky party
+                                jollof rice served with grilled chicken thigh and shito.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 45.00</span>
+                            <button
+                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <span class="material-icons text-sm">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item Card 2 -->
+                <div
+                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
+                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
+                        <img alt="Waakye"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Traditional Waakye dish with sides"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJXvocxc2cam3Lpt3FW2koagbsl3v47h1fhpqQ8p61FbtLi-fYbBDVhj3hLWs6JaMc0lTRVUzQWk6_UEuRIhgOzJD7IyRCsDcIWwoj1MeMMAoAjmV4cfqJKlRF8QHYEfpE5fb335BbF4MehIYrtYntkgkfWMHWaNagdLTuZY5SithhR0jy8icHthRbmhctKhtq6KU-S9jch5jYoJ5hID9CR51BQUp-FOor0bOX0p_hrmDWO3FIdaH9HTU093GG0bc60G7kax7EYcf0" />
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow py-1">
+                        <div>
+                            <h4
+                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
+                                Waakye Special</h4>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Rice and
+                                beans with spaghetti, gari, egg, fish, and wele.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 35.00</span>
+                            <button
+                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <span class="material-icons text-sm">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item Card 3 -->
+                <div
+                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
+                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
+                        <img alt="Grilled Tilapia"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Grilled fish with vegetables"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjZ4rpyQ8oEU4LNYW7qyDD6eqAtPzAinRA0zIiqpWzcYmn5whJipKXapMDObFc3Vqrh3dI7MxTobWtcUIabMwBfbzcRyVTC4oFF4neWuNQFXhvpVvINHlzbc8XgqFKIoiMfZn-NDYjyG-liwbQhAruaM6ht3dgmyUiIL6aBuOZrAXXvOvVfunFK92_FcQLdpID6DtBPbPP8nKj0vUZdgZob_zN9e9l8cbs5AVyd0qVDSWq2V4XPFm-cG_lpsPmyhbJQIZDpTMs6tJL" />
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow py-1">
+                        <div>
+                            <h4
+                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
+                                Grilled Tilapia</h4>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Fresh spicy
+                                grilled tilapia with banku and hot pepper sauce.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 65.00</span>
+                            <button
+                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <span class="material-icons text-sm">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item Card 4 -->
+                <div
+                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
+                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
+                        <img alt="Fufu and Light Soup"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Bowl of fufu with soup"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9Mz5Toacwisq2iasEgk64YJ7NbpowgCPChgKvL0O6F8f3qIO5NnFb7VHrcRjeH0vplUulavX2JIbloPE3OzttnTadhZ8Tzyvwdt6S0px6rQDYOKBDfsuiKm9Y9xzJcQjfcr_oBPUYV90rptkS6SxhPZ7Rhe2X8WwPICdUBFQH_YXtMoRxOgkXtna45J6b0H72yj9Ywwm1AugZaL10eIQlcmM-gOoINh1reSqYh6gC0kaJH4dr014Qy4L2NBMIFZ7FYGQj7H1k5oJr" />
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow py-1">
+                        <div>
+                            <h4
+                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
+                                Fufu &amp; Light Soup</h4>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Smooth fufu
+                                with goat meat light soup.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 50.00</span>
+                            <button
+                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <span class="material-icons text-sm">add</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Menu Section: Main Dishes -->
-            <section id="main-dishes">
-                <div class="flex items-center gap-3 mb-6">
-                    <h3 class="text-xl font-bold text-neutral-900 dark:text-white">Main Dishes</h3>
-                    <div class="h-px flex-grow bg-neutral-200 dark:bg-neutral-800"></div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Item Card 1 -->
-                    <div
-                        class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                        <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                            <img alt="Jollof Rice"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Spicy Jollof rice with chicken"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgBSw1HQR9PhrBup4XXKx6HtnErsmV3v4DdqeXjqH69eaOprdL0GfGChRzY6mhqtdiLNulRNxMHo-mlQx_23ujq1oawFdf1LMqDJb6bZtAOd9ZExJiPXjF-Lbn3ebOYRxmBDhRk-Lv_1wGYO5UKT0J1_O_yMFGjWEjHeLjgd8gg4VNIsr4zv7wONzAsrv1aoKN-Aeaseh8wlLjMQgJFIac865qkTXS_KozAlhHwdb_zFU6M-q4fqnEomgUhrAnTkwDYctfMjIZxKNj" />
-                            <div
-                                class="absolute top-1 right-1 bg-white/90 dark:bg-black/80 text-[10px] font-bold px-1.5 py-0.5 rounded text-neutral-600 dark:text-neutral-300 shadow-sm">
-                                Hot
-                            </div>
+        </section>
+        <!-- Menu Section: Sides -->
+        <section class="pt-4" id="sides">
+            <div class="flex items-center gap-3 mb-6">
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white">Sides</h3>
+                <div class="h-px flex-grow bg-neutral-200 dark:bg-neutral-800"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Item Card 5 -->
+                <div
+                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
+                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
+                        <img alt="Fried Plantain"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Golden fried plantain slices"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-QWvVxKKpW3dDG6uBLTvZVOJotZd88ft9VyphZoYFzIy04pvf8yxHn0DpeaoLyIT3s2dQaBnQbRuFwjx5IvoYQeEAg9MVxRu-d2T6SXSUXs57fGInvCjDGtufUMENNM0cx8i7oqhDLBibxGlhYA4hMjc5sQ5VezYCWyfKJsvcvA8JF6KX0XdYM2lnICi2jNmTJgybaV4oKlE9Dpb-BIo4p_9zYxDtBH4yzNoNkP4NwqmPoYXZEQjuZhD7bRILgLmKzcjOHdv0FvC9" />
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow py-1">
+                        <div>
+                            <h4
+                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
+                                Fried Plantain</h4>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Sweet ripe
+                                plantain fried to golden perfection.</p>
                         </div>
-                        <div class="flex flex-col justify-between flex-grow py-1">
-                            <div>
-                                <h4
-                                    class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 15.00</span>
+                            <button
+                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <span class="material-icons text-sm">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item Card 6 -->
+                <div
+                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
+                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
+                        <img alt="Kelewele"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Spicy fried plantain cubes"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ICE48rlrR3JiBxSI5litqkKhlC37SgeQXXRdbRklTngLNxi_uEPA10gZMH4lWZeyb9yHnwiMth-zQR1jtcNnB-q8nnlDBuc8wZtmDDXiYzmULIJQU_nfOmMaxIul5pUcOQlTvmuInMtRJ21HhEUcwADjZDsnGexsrDbExSB_5oiOznNckqBzRV7_ecAP1VE0zin2ylbs_Kcb1D7MjHA7I9sJd_oAlBrWo4a4qkTJJ1B-3HF18kPBKjhwwE65J2qowmlAlZ6-ykkf" />
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow py-1">
+                        <div>
+                            <h4
+                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
+                                Kelewele</h4>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Spicy fried
+                                plantain cubes seasoned with ginger and pepper.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 20.00</span>
+                            <button
+                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <span class="material-icons text-sm">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Right Column: Sticky Cart (30% on desktop -> col-span-4) -->
+    <div class="lg:col-span-4 relative">
+        <div class="sticky top-24 space-y-4">
+            <!-- Cart Container -->
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden flex flex-col max-h-[calc(100vh-120px)]">
+                <!-- Cart Header -->
+                <div
+                    class="p-5 border-b border-neutral-100 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2">
+                            <span class="material-icons text-primary text-xl">shopping_bag</span>
+                            Your Order
+                        </h2>
+                        <span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded-full">2
+                            items</span>
+                    </div>
+                </div>
+                <!-- Cart Items (Scrollable Area) -->
+                <div class="flex-grow overflow-y-auto p-5 space-y-4">
+                    <!-- Added Item 1 -->
+                    <div
+                        class="flex items-start gap-3 pb-4 border-b border-neutral-100 dark:border-neutral-700 last:border-0 last:pb-0">
+                        <div class="w-12 h-12 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 overflow-hidden">
+                            <img alt="Jollof Rice thumbnail" class="w-full h-full object-cover"
+                                data-alt="Small thumbnail of jollof rice"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuClLaq6eaT569TwsJvLnRUF_OZPNZuTLIT9gh24tniQZpamMRsqlnQXOpD0BpJF2bWOykqxvFQWwofcuaFGztplWpRVAmEFRq5ECGB1h6OLoYnOKJHvAYtNhp-iD5MO7gA-nr5ufAcArVNgS49awzXOxWedcjnLGjVP5CCTl7YLBIyGJkAMcDdfdOrfRVC5aEBinxDwiaCo9mZH8o_Ikqw8a7Vwvzv8rSk0guZb6MXWEPqUKEb_qFrAS4S-86UbtpmtAvlJbwExFtAX" />
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start mb-1">
+                                <h4 class="text-sm font-semibold text-neutral-900 dark:text-white leading-tight">
                                     Jollof Rice &amp; Chicken</h4>
-                                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Smoky party
-                                    jollof rice served with grilled chicken thigh and shito.</p>
+                                <span class="text-sm font-bold text-neutral-900 dark:text-white">45.00</span>
                             </div>
-                            <div class="flex items-center justify-between mt-3">
-                                <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 45.00</span>
-                                <button
-                                    class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                    <span class="material-icons text-sm">add</span>
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="flex items-center gap-2 bg-neutral-100 dark:bg-neutral-900 rounded-lg p-1">
+                                    <button
+                                        class="w-6 h-6 flex items-center justify-center bg-white dark:bg-neutral-800 rounded shadow-sm hover:text-primary text-neutral-500">
+                                        <span class="material-icons text-xs font-bold">remove</span>
+                                    </button>
+                                    <span class="text-xs font-bold w-4 text-center">1</span>
+                                    <button
+                                        class="w-6 h-6 flex items-center justify-center bg-white dark:bg-neutral-800 rounded shadow-sm hover:text-primary text-neutral-500">
+                                        <span class="material-icons text-xs font-bold">add</span>
+                                    </button>
+                                </div>
+                                <button class="text-neutral-400 hover:text-red-500 transition-colors">
+                                    <span class="material-icons text-lg">delete_outline</span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <!-- Item Card 2 -->
+                    <!-- Added Item 2 -->
                     <div
-                        class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                        <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                            <img alt="Waakye"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Traditional Waakye dish with sides"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJXvocxc2cam3Lpt3FW2koagbsl3v47h1fhpqQ8p61FbtLi-fYbBDVhj3hLWs6JaMc0lTRVUzQWk6_UEuRIhgOzJD7IyRCsDcIWwoj1MeMMAoAjmV4cfqJKlRF8QHYEfpE5fb335BbF4MehIYrtYntkgkfWMHWaNagdLTuZY5SithhR0jy8icHthRbmhctKhtq6KU-S9jch5jYoJ5hID9CR51BQUp-FOor0bOX0p_hrmDWO3FIdaH9HTU093GG0bc60G7kax7EYcf0" />
+                        class="flex items-start gap-3 pb-4 border-b border-neutral-100 dark:border-neutral-700 last:border-0 last:pb-0">
+                        <div class="w-12 h-12 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 overflow-hidden">
+                            <img alt="Plantain thumbnail" class="w-full h-full object-cover"
+                                data-alt="Small thumbnail of plantain"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3h3COrjY5AWQR5MrVs4jfGB2UgUN5W5UlzVM7YRSSf0j7L7xtlnlrfxyM1rAUaudsjJ-Is0wHSU0e9mnyterQfy5hyAYOnn-SE46Dc9EjKVNx_U14423ieb36Bfx1MxvFYYT_0WBhFeDgi_PiBcQuIf_TG6XblHG9-_ytBTMabMX-Sfld-pE1mWWQhgKkiX4AIGsoL9zscmSV_vnrn-4yxOqGECwqVXPkO7TsiloZU2iZVrx2fer5E_6-XL0-ARG2W34BkW_H5Q18" />
                         </div>
-                        <div class="flex flex-col justify-between flex-grow py-1">
-                            <div>
-                                <h4
-                                    class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                    Waakye Special</h4>
-                                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Rice and
-                                    beans with spaghetti, gari, egg, fish, and wele.</p>
-                            </div>
-                            <div class="flex items-center justify-between mt-3">
-                                <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 35.00</span>
-                                <button
-                                    class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                    <span class="material-icons text-sm">add</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item Card 3 -->
-                    <div
-                        class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                        <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                            <img alt="Grilled Tilapia"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Grilled fish with vegetables"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjZ4rpyQ8oEU4LNYW7qyDD6eqAtPzAinRA0zIiqpWzcYmn5whJipKXapMDObFc3Vqrh3dI7MxTobWtcUIabMwBfbzcRyVTC4oFF4neWuNQFXhvpVvINHlzbc8XgqFKIoiMfZn-NDYjyG-liwbQhAruaM6ht3dgmyUiIL6aBuOZrAXXvOvVfunFK92_FcQLdpID6DtBPbPP8nKj0vUZdgZob_zN9e9l8cbs5AVyd0qVDSWq2V4XPFm-cG_lpsPmyhbJQIZDpTMs6tJL" />
-                        </div>
-                        <div class="flex flex-col justify-between flex-grow py-1">
-                            <div>
-                                <h4
-                                    class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                    Grilled Tilapia</h4>
-                                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Fresh spicy
-                                    grilled tilapia with banku and hot pepper sauce.</p>
-                            </div>
-                            <div class="flex items-center justify-between mt-3">
-                                <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 65.00</span>
-                                <button
-                                    class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                    <span class="material-icons text-sm">add</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item Card 4 -->
-                    <div
-                        class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                        <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                            <img alt="Fufu and Light Soup"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Bowl of fufu with soup"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9Mz5Toacwisq2iasEgk64YJ7NbpowgCPChgKvL0O6F8f3qIO5NnFb7VHrcRjeH0vplUulavX2JIbloPE3OzttnTadhZ8Tzyvwdt6S0px6rQDYOKBDfsuiKm9Y9xzJcQjfcr_oBPUYV90rptkS6SxhPZ7Rhe2X8WwPICdUBFQH_YXtMoRxOgkXtna45J6b0H72yj9Ywwm1AugZaL10eIQlcmM-gOoINh1reSqYh6gC0kaJH4dr014Qy4L2NBMIFZ7FYGQj7H1k5oJr" />
-                        </div>
-                        <div class="flex flex-col justify-between flex-grow py-1">
-                            <div>
-                                <h4
-                                    class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                    Fufu &amp; Light Soup</h4>
-                                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Smooth fufu
-                                    with goat meat light soup.</p>
-                            </div>
-                            <div class="flex items-center justify-between mt-3">
-                                <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 50.00</span>
-                                <button
-                                    class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                    <span class="material-icons text-sm">add</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Menu Section: Sides -->
-            <section class="pt-4" id="sides">
-                <div class="flex items-center gap-3 mb-6">
-                    <h3 class="text-xl font-bold text-neutral-900 dark:text-white">Sides</h3>
-                    <div class="h-px flex-grow bg-neutral-200 dark:bg-neutral-800"></div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Item Card 5 -->
-                    <div
-                        class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                        <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                            <img alt="Fried Plantain"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Golden fried plantain slices"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-QWvVxKKpW3dDG6uBLTvZVOJotZd88ft9VyphZoYFzIy04pvf8yxHn0DpeaoLyIT3s2dQaBnQbRuFwjx5IvoYQeEAg9MVxRu-d2T6SXSUXs57fGInvCjDGtufUMENNM0cx8i7oqhDLBibxGlhYA4hMjc5sQ5VezYCWyfKJsvcvA8JF6KX0XdYM2lnICi2jNmTJgybaV4oKlE9Dpb-BIo4p_9zYxDtBH4yzNoNkP4NwqmPoYXZEQjuZhD7bRILgLmKzcjOHdv0FvC9" />
-                        </div>
-                        <div class="flex flex-col justify-between flex-grow py-1">
-                            <div>
-                                <h4
-                                    class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start mb-1">
+                                <h4 class="text-sm font-semibold text-neutral-900 dark:text-white leading-tight">
                                     Fried Plantain</h4>
-                                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Sweet ripe
-                                    plantain fried to golden perfection.</p>
+                                <span class="text-sm font-bold text-neutral-900 dark:text-white">15.00</span>
                             </div>
-                            <div class="flex items-center justify-between mt-3">
-                                <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 15.00</span>
-                                <button
-                                    class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                    <span class="material-icons text-sm">add</span>
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="flex items-center gap-2 bg-neutral-100 dark:bg-neutral-900 rounded-lg p-1">
+                                    <button
+                                        class="w-6 h-6 flex items-center justify-center bg-white dark:bg-neutral-800 rounded shadow-sm hover:text-primary text-neutral-500">
+                                        <span class="material-icons text-xs font-bold">remove</span>
+                                    </button>
+                                    <span class="text-xs font-bold w-4 text-center">1</span>
+                                    <button
+                                        class="w-6 h-6 flex items-center justify-center bg-white dark:bg-neutral-800 rounded shadow-sm hover:text-primary text-neutral-500">
+                                        <span class="material-icons text-xs font-bold">add</span>
+                                    </button>
+                                </div>
+                                <button class="text-neutral-400 hover:text-red-500 transition-colors">
+                                    <span class="material-icons text-lg">delete_outline</span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <!-- Item Card 6 -->
-                    <div
-                        class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                        <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                            <img alt="Kelewele"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Spicy fried plantain cubes"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ICE48rlrR3JiBxSI5litqkKhlC37SgeQXXRdbRklTngLNxi_uEPA10gZMH4lWZeyb9yHnwiMth-zQR1jtcNnB-q8nnlDBuc8wZtmDDXiYzmULIJQU_nfOmMaxIul5pUcOQlTvmuInMtRJ21HhEUcwADjZDsnGexsrDbExSB_5oiOznNckqBzRV7_ecAP1VE0zin2ylbs_Kcb1D7MjHA7I9sJd_oAlBrWo4a4qkTJJ1B-3HF18kPBKjhwwE65J2qowmlAlZ6-ykkf" />
+                    <!-- Empty State (Hidden) -->
+                    <div class="hidden flex-col items-center justify-center py-10 text-center">
+                        <div
+                            class="w-24 h-24 bg-neutral-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mb-4">
+                            <span class="material-icons text-neutral-400 text-5xl">lunch_dining</span>
                         </div>
-                        <div class="flex flex-col justify-between flex-grow py-1">
-                            <div>
-                                <h4
-                                    class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                    Kelewele</h4>
-                                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Spicy fried
-                                    plantain cubes seasoned with ginger and pepper.</p>
-                            </div>
-                            <div class="flex items-center justify-between mt-3">
-                                <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 20.00</span>
-                                <button
-                                    class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                    <span class="material-icons text-sm">add</span>
-                                </button>
-                            </div>
-                        </div>
+                        <h3 class="text-neutral-900 dark:text-white font-medium mb-1">Your lunch box is empty</h3>
+                        <p class="text-neutral-500 text-sm">Add some delicious meals from the menu to get started.
+                        </p>
                     </div>
                 </div>
-            </section>
-        </div>
-        <!-- Right Column: Sticky Cart (30% on desktop -> col-span-4) -->
-        <div class="lg:col-span-4 relative">
-            <div class="sticky top-24 space-y-4">
-                <!-- Cart Container -->
-                <div
-                    class="bg-white dark:bg-neutral-800 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden flex flex-col max-h-[calc(100vh-120px)]">
-                    <!-- Cart Header -->
-                    <div
-                        class="p-5 border-b border-neutral-100 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                                <span class="material-icons text-primary text-xl">shopping_bag</span>
-                                Your Order
-                            </h2>
-                            <span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded-full">2
-                                items</span>
+                <!-- Cart Footer -->
+                <div class="bg-neutral-50 dark:bg-neutral-900 p-5 border-t border-neutral-200 dark:border-neutral-700">
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm text-neutral-500 dark:text-neutral-400">
+                            <span>Subtotal</span>
+                            <span>GHS 60.00</span>
                         </div>
-                    </div>
-                    <!-- Cart Items (Scrollable Area) -->
-                    <div class="flex-grow overflow-y-auto p-5 space-y-4">
-                        <!-- Added Item 1 -->
+                        <div class="flex justify-between text-sm text-neutral-500 dark:text-neutral-400">
+                            <span>Delivery Fee</span>
+                            <span class="text-green-600 font-medium">Free</span>
+                        </div>
                         <div
-                            class="flex items-start gap-3 pb-4 border-b border-neutral-100 dark:border-neutral-700 last:border-0 last:pb-0">
-                            <div
-                                class="w-12 h-12 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 overflow-hidden">
-                                <img alt="Jollof Rice thumbnail" class="w-full h-full object-cover"
-                                    data-alt="Small thumbnail of jollof rice"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuClLaq6eaT569TwsJvLnRUF_OZPNZuTLIT9gh24tniQZpamMRsqlnQXOpD0BpJF2bWOykqxvFQWwofcuaFGztplWpRVAmEFRq5ECGB1h6OLoYnOKJHvAYtNhp-iD5MO7gA-nr5ufAcArVNgS49awzXOxWedcjnLGjVP5CCTl7YLBIyGJkAMcDdfdOrfRVC5aEBinxDwiaCo9mZH8o_Ikqw8a7Vwvzv8rSk0guZb6MXWEPqUKEb_qFrAS4S-86UbtpmtAvlJbwExFtAX" />
-                            </div>
-                            <div class="flex-grow">
-                                <div class="flex justify-between items-start mb-1">
-                                    <h4 class="text-sm font-semibold text-neutral-900 dark:text-white leading-tight">
-                                        Jollof Rice &amp; Chicken</h4>
-                                    <span class="text-sm font-bold text-neutral-900 dark:text-white">45.00</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-2">
-                                    <div
-                                        class="flex items-center gap-2 bg-neutral-100 dark:bg-neutral-900 rounded-lg p-1">
-                                        <button
-                                            class="w-6 h-6 flex items-center justify-center bg-white dark:bg-neutral-800 rounded shadow-sm hover:text-primary text-neutral-500">
-                                            <span class="material-icons text-xs font-bold">remove</span>
-                                        </button>
-                                        <span class="text-xs font-bold w-4 text-center">1</span>
-                                        <button
-                                            class="w-6 h-6 flex items-center justify-center bg-white dark:bg-neutral-800 rounded shadow-sm hover:text-primary text-neutral-500">
-                                            <span class="material-icons text-xs font-bold">add</span>
-                                        </button>
-                                    </div>
-                                    <button class="text-neutral-400 hover:text-red-500 transition-colors">
-                                        <span class="material-icons text-lg">delete_outline</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Added Item 2 -->
-                        <div
-                            class="flex items-start gap-3 pb-4 border-b border-neutral-100 dark:border-neutral-700 last:border-0 last:pb-0">
-                            <div
-                                class="w-12 h-12 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 overflow-hidden">
-                                <img alt="Plantain thumbnail" class="w-full h-full object-cover"
-                                    data-alt="Small thumbnail of plantain"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3h3COrjY5AWQR5MrVs4jfGB2UgUN5W5UlzVM7YRSSf0j7L7xtlnlrfxyM1rAUaudsjJ-Is0wHSU0e9mnyterQfy5hyAYOnn-SE46Dc9EjKVNx_U14423ieb36Bfx1MxvFYYT_0WBhFeDgi_PiBcQuIf_TG6XblHG9-_ytBTMabMX-Sfld-pE1mWWQhgKkiX4AIGsoL9zscmSV_vnrn-4yxOqGECwqVXPkO7TsiloZU2iZVrx2fer5E_6-XL0-ARG2W34BkW_H5Q18" />
-                            </div>
-                            <div class="flex-grow">
-                                <div class="flex justify-between items-start mb-1">
-                                    <h4 class="text-sm font-semibold text-neutral-900 dark:text-white leading-tight">
-                                        Fried Plantain</h4>
-                                    <span class="text-sm font-bold text-neutral-900 dark:text-white">15.00</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-2">
-                                    <div
-                                        class="flex items-center gap-2 bg-neutral-100 dark:bg-neutral-900 rounded-lg p-1">
-                                        <button
-                                            class="w-6 h-6 flex items-center justify-center bg-white dark:bg-neutral-800 rounded shadow-sm hover:text-primary text-neutral-500">
-                                            <span class="material-icons text-xs font-bold">remove</span>
-                                        </button>
-                                        <span class="text-xs font-bold w-4 text-center">1</span>
-                                        <button
-                                            class="w-6 h-6 flex items-center justify-center bg-white dark:bg-neutral-800 rounded shadow-sm hover:text-primary text-neutral-500">
-                                            <span class="material-icons text-xs font-bold">add</span>
-                                        </button>
-                                    </div>
-                                    <button class="text-neutral-400 hover:text-red-500 transition-colors">
-                                        <span class="material-icons text-lg">delete_outline</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Empty State (Hidden) -->
-                        <div class="hidden flex-col items-center justify-center py-10 text-center">
-                            <div
-                                class="w-24 h-24 bg-neutral-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mb-4">
-                                <span class="material-icons text-neutral-400 text-5xl">lunch_dining</span>
-                            </div>
-                            <h3 class="text-neutral-900 dark:text-white font-medium mb-1">Your lunch box is empty</h3>
-                            <p class="text-neutral-500 text-sm">Add some delicious meals from the menu to get started.
-                            </p>
+                            class="flex justify-between text-lg font-bold text-neutral-900 dark:text-white pt-2 border-t border-neutral-200 dark:border-neutral-800 mt-2">
+                            <span>Total</span>
+                            <span class="text-primary">GHS 60.00</span>
                         </div>
                     </div>
-                    <!-- Cart Footer -->
-                    <div
-                        class="bg-neutral-50 dark:bg-neutral-900 p-5 border-t border-neutral-200 dark:border-neutral-700">
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between text-sm text-neutral-500 dark:text-neutral-400">
-                                <span>Subtotal</span>
-                                <span>GHS 60.00</span>
-                            </div>
-                            <div class="flex justify-between text-sm text-neutral-500 dark:text-neutral-400">
-                                <span>Delivery Fee</span>
-                                <span class="text-green-600 font-medium">Free</span>
-                            </div>
-                            <div
-                                class="flex justify-between text-lg font-bold text-neutral-900 dark:text-white pt-2 border-t border-neutral-200 dark:border-neutral-800 mt-2">
-                                <span>Total</span>
-                                <span class="text-primary">GHS 60.00</span>
-                            </div>
-                        </div>
-                        <button
-                            class="w-full bg-primary hover:bg-orange-700 text-white font-semibold py-3.5 px-4 rounded-lg shadow-lg shadow-primary/30 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
-                            <span>Send Order to Admin</span>
-                            <span class="material-icons text-sm">arrow_forward</span>
-                        </button>
-                    </div>
+                    <button
+                        class="w-full bg-primary hover:bg-orange-700 text-white font-semibold py-3.5 px-4 rounded-lg shadow-lg shadow-primary/30 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+                        <span>Send Order to Admin</span>
+                        <span class="material-icons text-sm">arrow_forward</span>
+                    </button>
                 </div>
-                <!-- Helper Card -->
-                <div
-                    class="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-lg p-4 flex items-start gap-3">
-                    <span class="material-icons text-blue-500 mt-0.5">info</span>
-                    <div>
-                        <h4 class="text-sm font-semibold text-blue-900 dark:text-blue-100">Ordering for a team?</h4>
-                        <p class="text-xs text-blue-700 dark:text-blue-300 mt-1">You can add notes for specific dietary
-                            requirements in the checkout step.</p>
-                    </div>
+            </div>
+            <!-- Helper Card -->
+            <div
+                class="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-lg p-4 flex items-start gap-3">
+                <span class="material-icons text-blue-500 mt-0.5">info</span>
+                <div>
+                    <h4 class="text-sm font-semibold text-blue-900 dark:text-blue-100">Ordering for a team?</h4>
+                    <p class="text-xs text-blue-700 dark:text-blue-300 mt-1">You can add notes for specific dietary
+                        requirements in the checkout step.</p>
                 </div>
             </div>
         </div>
-    </main>
-</body>
-
-</html>
+    </div>
+</main>
+{% endblock %}
