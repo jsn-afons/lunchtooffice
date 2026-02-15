@@ -79,14 +79,18 @@ def signup(request):
 
 @login_required
 def restaurant_selection(request):
+    user = request.user
     restaurants = Restaurant.objects.all()
     context = {
-        'restaurants': restaurants
+        'restaurants': restaurants,
+        'user': user,
     }
     return render(request, 'core/restaurant_selection.html', context)
 
 @login_required
 def menu(request, restaurant_id):
+    #make sure that user is tied to organization so users only see what their organization is ordering
+    
     menu_items = Menu.objects.filter(restaurant=restaurant_id)
     context = {
         'menu_items': menu_items
