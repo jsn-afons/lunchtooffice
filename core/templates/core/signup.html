@@ -41,131 +41,151 @@ color: #e9590c;
 {% endif %}
 <!-- Main Container -->
 <div class="w-full max-w-2xl">
-    <!-- Logo Header -->
-    <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center gap-2 mb-2">
-            <span class="material-icons-round text-primary text-4xl">lunch_dining</span>
-            <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">LunchToOffice</span>
-        </div>
-        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Join the team lunch</h1>
-        <p class="text-gray-500 dark:text-gray-400">Select your role to get started.</p>
-    </div>
+
+
     <!-- Card -->
     <div
         class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 p-6 md:p-10">
         <form action="{% url 'signup' %}" class="space-y-8" method="POST">
             {% csrf_token %}
-            <!-- Role Selection Section -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Staff Role -->
-                <label class="cursor-pointer relative group">
-                    <input checked="" class="role-radio sr-only" name="role" type="radio" value="staff" />
-                    <div
-                        class="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-5 flex flex-col items-center justify-center text-center transition-all duration-200 hover:border-primary/50 group-hover:bg-gray-50 dark:group-hover:bg-gray-800/50 h-full relative">
-                        <!-- Checkmark for active state -->
-                        <div
-                            class="check-icon absolute top-3 right-3 opacity-0 transform scale-75 transition-all duration-200 bg-primary text-white rounded-full p-0.5">
-                            <span class="material-icons-round text-sm">check</span>
-                        </div>
-                        <span
-                            class="material-icons-round text-5xl text-gray-400 dark:text-gray-500 mb-3 role-icon transition-colors">badge</span>
-                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Staff Member</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-snug">I want to order lunch
-                            to my office desk.</p>
-                    </div>
-                </label>
-                <!-- Admin Role -->
-                <label class="cursor-pointer relative group">
-                    <input class="role-radio sr-only" name="role" type="radio" value="admin" />
-                    <div
-                        class="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-5 flex flex-col items-center justify-center text-center transition-all duration-200 hover:border-primary/50 group-hover:bg-gray-50 dark:group-hover:bg-gray-800/50 h-full relative">
-                        <!-- Checkmark for active state -->
-                        <div
-                            class="check-icon absolute top-3 right-3 opacity-0 transform scale-75 transition-all duration-200 bg-primary text-white rounded-full p-0.5">
-                            <span class="material-icons-round text-sm">check</span>
-                        </div>
-                        <span
-                            class="material-icons-round text-5xl text-gray-400 dark:text-gray-500 mb-3 role-icon transition-colors">admin_panel_settings</span>
-                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Office Admin</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-snug">I manage lunch orders
-                            for my company.</p>
-                    </div>
-                </label>
+            <!-- Logo Header -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center gap-2 mb-2">
+                    <span class="material-icons-round text-primary text-4xl">lunch_dining</span>
+                    <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">LunchToOffice</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Join the team lunch</h1>
+                <p class="text-gray-500 dark:text-gray-400">Select your role to get started.</p>
             </div>
             <!-- Inputs Section -->
-            <div class="space-y-5">
-                <!-- Name Row -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div class="space-y-1.5">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="first-name">First
-                            Name</label>
-                        <!-- <input
+            <div class="space-y-6">
+                <!-- Organization Section -->
+                <div>
+                    <h3
+                        class="text-lg font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+                        Organization Details</h3>
+                    <div class="space-y-5">
+                        <div class="space-y-1.5">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                for="id_org_name">Organization Name</label>
+                            {{ form.org_name }}
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="id_org_phonenumber">Organization Phone Number</label>
+                                {{ form.org_phonenumber }}
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="id_org_address">Organization Address</label>
+                                {{ form.org_address }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Explanation Banner -->
+                <div
+                    class="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-lg p-4 flex items-start gap-3 my-2">
+                    <span class="material-icons-round text-blue-500 mt-0.5">info</span>
+                    <div>
+                        <h4 class="text-sm font-semibold text-blue-900 dark:text-blue-100">You will be the Food Admin
+                        </h4>
+                        <p class="text-xs text-blue-700 dark:text-blue-300 mt-1">
+                            By creating this organization, you will be set up as the primary <strong>Office
+                                Admin</strong>.
+                            You will be able to invite other staff members and manage team orders separately after your
+                            account is created.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- User Details Section -->
+                <div>
+                    <h3
+                        class="text-lg font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+                        Admin Profile</h3>
+                    <div class="space-y-5">
+                        <!-- Name Row -->
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="first-name">First
+                                    Name</label>
+                                <!-- <input
                                 class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
                                 id="first-name" name="first-name" placeholder="Jane" type="text" /> -->
-                        {{ form.first_name }}
-                    </div>
+                                {{ form.first_name }}
+                            </div>
 
-                    <div class="space-y-1.5">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="last-name">Last
-                            Name</label>
-                        <!-- <input
+                            <div class="space-y-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="last-name">Last
+                                    Name</label>
+                                <!-- <input
                                 class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
                                 id="last-name" name="last-name" placeholder="Doe" type="text" /> -->
-                        {{ form.last_name }}
-                    </div>
-                </div>
-                <!-- Email -->
-                <div class="space-y-1.5">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="email">Work
-                        Email</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <!-- <span class="material-icons-round text-gray-400 text-lg">email</span> -->
+                                {{ form.last_name }}
+                            </div>
                         </div>
-                        <!-- <input
+                        <!-- Email -->
+                        <div class="space-y-1.5">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="email">Work
+                                Email</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <!-- <span class="material-icons-round text-gray-400 text-lg">email</span> -->
+                                </div>
+                                <!-- <input
                                 class="block w-full pl-10 rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5"
                                 id="email" name="email" placeholder="jane@company.com" type="email" /> -->
-                        {{ form.email }}
-                    </div>
-                </div>
-                <!-- Password Row -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div class="space-y-1.5">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            for="password">Password</label>
-                        <div class="relative">
-                            <!-- <input
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <!-- Password Row -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="password">Password</label>
+                                <div class="relative">
+                                    <!-- <input
                                     class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3 pr-10"
                                     id="password" name="password" type="password" /> -->
-                            {{ form.password }}
-                            <button
-                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none"
-                                type="button">
-                                <span class="material-icons-round text-lg">visibility_off</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="space-y-1.5">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            for="confirm-password">Confirm Password</label>
-                        <!-- <input
+                                    {{ form.password }}
+                                    <button
+                                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none"
+                                        type="button">
+                                        <span class="material-icons-round text-lg">visibility_off</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="confirm-password">Confirm Password</label>
+                                <!-- <input
                                 class="block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3"
                                 id="confirm-password" name="confirm-password" type="password" /> -->
-                        {{ form.confirm_password }}
-                    </div>
-                </div>
-                <!-- Terms Checkbox -->
-                <div class="flex items-start pt-2">
-                    <div class="flex h-5 items-center">
-                        <input
-                            class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary bg-gray-100 dark:bg-gray-800 dark:border-gray-600"
-                            id="terms" name="terms" type="checkbox" />
-                    </div>
-                    <div class="ml-3 text-sm">
-                        <label class="text-gray-500 dark:text-gray-400" for="terms">I agree to the <a
-                                class="font-medium text-primary hover:text-primary-hover" href="#">Terms of
-                                Service</a> and <a class="font-medium text-primary hover:text-primary-hover"
-                                href="#">Privacy Policy</a>.</label>
+                                {{ form.confirm_password }}
+                            </div>
+                        </div>
+                        <!-- Terms Checkbox -->
+                        <div class="flex items-start pt-2">
+                            <div class="flex h-5 items-center">
+                                <input
+                                    class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary bg-gray-100 dark:bg-gray-800 dark:border-gray-600"
+                                    id="terms" name="terms" type="checkbox" />
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label class="text-gray-500 dark:text-gray-400" for="terms">I agree to the <a
+                                        class="font-medium text-primary hover:text-primary-hover" href="#">Terms of
+                                        Service</a> and <a class="font-medium text-primary hover:text-primary-hover"
+                                        href="#">Privacy Policy</a>.</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -179,14 +199,14 @@ color: #e9590c;
                 <p class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
                     Already have an account?
                     <a class="font-bold leading-6 text-primary hover:text-primary-hover hover:underline transition-all"
-                        href="#">Sign in</a>
+                        href="{% url 'login' %}">Sign in</a>
                 </p>
             </div>
         </form>
     </div>
     <!-- Subtle Footer Info -->
     <div class="mt-8 text-center text-xs text-gray-400 dark:text-gray-600">
-        © 2023 LunchToOffice Inc. All rights reserved.
+        © 2026 LunchToOffice Inc. All rights reserved.
     </div>
 </div>
 <!-- Decorative Image Panel (Hidden on mobile, visible as background graphic on very large screens if desired, but here kept minimal as requested) -->

@@ -130,6 +130,7 @@ scrollbar-width: none;
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Item Card 1 -->
+                {% for item in menu_items %}
                 <div
                     class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
                     <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
@@ -146,12 +147,15 @@ scrollbar-width: none;
                         <div>
                             <h4
                                 class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                Jollof Rice &amp; Chicken</h4>
-                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Smoky party
-                                jollof rice served with grilled chicken thigh and shito.</p>
+                                {{ item.menu_item|title }}</h4>
+                            {% if item.description %}
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">
+                                {{ item.description }}</p>
+                            {% endif %}
                         </div>
                         <div class="flex items-center justify-between mt-3">
-                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 45.00</span>
+                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS
+                                {{ item.price|floatformat:2 }}</span>
                             <button
                                 class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
                                 <span class="material-icons text-sm">add</span>
@@ -159,147 +163,10 @@ scrollbar-width: none;
                         </div>
                     </div>
                 </div>
-                <!-- Item Card 2 -->
-                <div
-                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                        <img alt="Waakye"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            data-alt="Traditional Waakye dish with sides"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJXvocxc2cam3Lpt3FW2koagbsl3v47h1fhpqQ8p61FbtLi-fYbBDVhj3hLWs6JaMc0lTRVUzQWk6_UEuRIhgOzJD7IyRCsDcIWwoj1MeMMAoAjmV4cfqJKlRF8QHYEfpE5fb335BbF4MehIYrtYntkgkfWMHWaNagdLTuZY5SithhR0jy8icHthRbmhctKhtq6KU-S9jch5jYoJ5hID9CR51BQUp-FOor0bOX0p_hrmDWO3FIdaH9HTU093GG0bc60G7kax7EYcf0" />
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow py-1">
-                        <div>
-                            <h4
-                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                Waakye Special</h4>
-                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Rice and
-                                beans with spaghetti, gari, egg, fish, and wele.</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 35.00</span>
-                            <button
-                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                <span class="material-icons text-sm">add</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item Card 3 -->
-                <div
-                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                        <img alt="Grilled Tilapia"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            data-alt="Grilled fish with vegetables"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjZ4rpyQ8oEU4LNYW7qyDD6eqAtPzAinRA0zIiqpWzcYmn5whJipKXapMDObFc3Vqrh3dI7MxTobWtcUIabMwBfbzcRyVTC4oFF4neWuNQFXhvpVvINHlzbc8XgqFKIoiMfZn-NDYjyG-liwbQhAruaM6ht3dgmyUiIL6aBuOZrAXXvOvVfunFK92_FcQLdpID6DtBPbPP8nKj0vUZdgZob_zN9e9l8cbs5AVyd0qVDSWq2V4XPFm-cG_lpsPmyhbJQIZDpTMs6tJL" />
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow py-1">
-                        <div>
-                            <h4
-                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                Grilled Tilapia</h4>
-                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Fresh spicy
-                                grilled tilapia with banku and hot pepper sauce.</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 65.00</span>
-                            <button
-                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                <span class="material-icons text-sm">add</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item Card 4 -->
-                <div
-                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                        <img alt="Fufu and Light Soup"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            data-alt="Bowl of fufu with soup"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9Mz5Toacwisq2iasEgk64YJ7NbpowgCPChgKvL0O6F8f3qIO5NnFb7VHrcRjeH0vplUulavX2JIbloPE3OzttnTadhZ8Tzyvwdt6S0px6rQDYOKBDfsuiKm9Y9xzJcQjfcr_oBPUYV90rptkS6SxhPZ7Rhe2X8WwPICdUBFQH_YXtMoRxOgkXtna45J6b0H72yj9Ywwm1AugZaL10eIQlcmM-gOoINh1reSqYh6gC0kaJH4dr014Qy4L2NBMIFZ7FYGQj7H1k5oJr" />
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow py-1">
-                        <div>
-                            <h4
-                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                Fufu &amp; Light Soup</h4>
-                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Smooth fufu
-                                with goat meat light soup.</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 50.00</span>
-                            <button
-                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                <span class="material-icons text-sm">add</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </section>
-        <!-- Menu Section: Sides -->
-        <section class="pt-4" id="sides">
-            <div class="flex items-center gap-3 mb-6">
-                <h3 class="text-xl font-bold text-neutral-900 dark:text-white">Sides</h3>
-                <div class="h-px flex-grow bg-neutral-200 dark:bg-neutral-800"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Item Card 5 -->
-                <div
-                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                        <img alt="Fried Plantain"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            data-alt="Golden fried plantain slices"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-QWvVxKKpW3dDG6uBLTvZVOJotZd88ft9VyphZoYFzIy04pvf8yxHn0DpeaoLyIT3s2dQaBnQbRuFwjx5IvoYQeEAg9MVxRu-d2T6SXSUXs57fGInvCjDGtufUMENNM0cx8i7oqhDLBibxGlhYA4hMjc5sQ5VezYCWyfKJsvcvA8JF6KX0XdYM2lnICi2jNmTJgybaV4oKlE9Dpb-BIo4p_9zYxDtBH4yzNoNkP4NwqmPoYXZEQjuZhD7bRILgLmKzcjOHdv0FvC9" />
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow py-1">
-                        <div>
-                            <h4
-                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                Fried Plantain</h4>
-                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Sweet ripe
-                                plantain fried to golden perfection.</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 15.00</span>
-                            <button
-                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                <span class="material-icons text-sm">add</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item Card 6 -->
-                <div
-                    class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
-                    <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
-                        <img alt="Kelewele"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            data-alt="Spicy fried plantain cubes"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ICE48rlrR3JiBxSI5litqkKhlC37SgeQXXRdbRklTngLNxi_uEPA10gZMH4lWZeyb9yHnwiMth-zQR1jtcNnB-q8nnlDBuc8wZtmDDXiYzmULIJQU_nfOmMaxIul5pUcOQlTvmuInMtRJ21HhEUcwADjZDsnGexsrDbExSB_5oiOznNckqBzRV7_ecAP1VE0zin2ylbs_Kcb1D7MjHA7I9sJd_oAlBrWo4a4qkTJJ1B-3HF18kPBKjhwwE65J2qowmlAlZ6-ykkf" />
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow py-1">
-                        <div>
-                            <h4
-                                class="font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                                Kelewele</h4>
-                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">Spicy fried
-                                plantain cubes seasoned with ginger and pepper.</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="font-bold text-lg text-neutral-900 dark:text-white">GHS 20.00</span>
-                            <button
-                                class="bg-primary/10 hover:bg-primary text-primary hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                                <span class="material-icons text-sm">add</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
     </div>
     <!-- Right Column: Sticky Cart (30% on desktop -> col-span-4) -->
     <div class="lg:col-span-4 relative">

@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us | LunchToOffice - Bulk Corporate Lunch Delivery in Ghana{% endblock %}
+
+{% block extra_head %}
+<!-- SEO Optimization Meta Tags -->
+<meta name="description"
+    content="LunchToOffice connects companies and offices in Ghana with top local restaurants for seamless bulk lunch orders. Discover how we are revolutionizing corporate dining." />
+<meta name="keywords"
+    content="bulk lunch Delivery Ghana, office food orders Accra, corporate catering Ghana, LunchToOffice, connect restaurants offices, B2B food delivery, workplace lunch solutions" />
+<meta property="og:title" content="About Us | LunchToOffice - Corporate Lunch Delivery in Ghana" />
+<meta property="og:description"
+    content="We connect offices in Ghana with top local restaurants for easy, reliable bulk lunch orders." />
+<meta property="og:type" content="website" />
+{% endblock %}
+
+{% block body %}
+{% include 'partials/_navbar.html' %}
+
+<main class="min-h-screen bg-background-light dark:bg-background-dark pt-4 pb-20">
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 mb-16 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
+            Fueling Ghana's Workforce, <br class="hidden sm:block" />
+            <span class="text-primary">One Corporate Lunch at a Time.</span>
+        </h1>
+        <p class="mt-6 max-w-2xl mx-auto text-xl text-slate-600 dark:text-gray-300">
+            LunchToOffice is the ultimate bridge between busy corporate offices and
+            top-tier restaurants. We make bulk lunch orders seamless, reliable, and delicious.
+        </p>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+            <div
+                class="bg-white dark:bg-surface-dark rounded-2xl p-8 sm:p-10 shadow-sm border border-neutral-200 dark:border-neutral-800 transform transition duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div
+                    class="w-14 h-14 bg-primary-light text-primary rounded-xl flex items-center justify-center mb-6 shadow-sm">
+                    <span class="material-icons text-3xl">flag</span>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Our Mission</h2>
+                <p class="text-slate-600 dark:text-gray-300 leading-relaxed text-lg">
+                    To eliminate the daily hassle of office lunch planning by providing a streamlined platform where
+                    companies in Ghana can easily discover, schedule, and receive bulk food orders from the best local
+                    restaurants. We save you time so your team can focus on what matters most.
+                </p>
+            </div>
+
+            <div
+                class="bg-white dark:bg-surface-dark rounded-2xl p-8 sm:p-10 shadow-sm border border-neutral-200 dark:border-neutral-800 transform transition duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div
+                    class="w-14 h-14 bg-primary-light text-primary rounded-xl flex items-center justify-center mb-6 shadow-sm">
+                    <span class="material-icons text-3xl">visibility</span>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Our Vision</h2>
+                <p class="text-slate-600 dark:text-gray-300 leading-relaxed text-lg">
+                    To be the leading corporate food delivery partner across West Africa, empowering local restaurants
+                    with predictable, large-scale orders while ensuring every office worker has access to a satisfying,
+                    timely, and quality mid-day meal.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem We Solve / Why Choose Us -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-8 mb-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Why LunchToOffice?</h2>
+            <p class="mt-4 text-lg text-slate-600 dark:text-gray-300 max-w-3xl mx-auto">
+                We're creating a win-win ecosystem for both the corporate sector and the culinary industry.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Box 1 -->
+            <div class="text-center p-6 group">
+                <div
+                    class="mx-auto w-20 h-20 bg-white dark:bg-surface-dark rounded-full shadow-md flex items-center justify-center mb-6 border border-neutral-100 dark:border-neutral-800 group-hover:scale-110 transition-transform duration-300">
+                    <span class="material-icons text-primary text-4xl">business</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">For Offices</h3>
+                <p class="text-slate-600 dark:text-gray-300">
+                    No more scrolling through individual menus or coordinating multiple riders. Consolidate your
+                    company's lunch orders into one easy, predictable daily delivery.
+                </p>
+            </div>
+            <!-- Box 2 -->
+            <div class="text-center p-6 group">
+                <div
+                    class="mx-auto w-20 h-20 bg-white dark:bg-surface-dark rounded-full shadow-md flex items-center justify-center mb-6 border border-neutral-100 dark:border-neutral-800 group-hover:scale-110 transition-transform duration-300">
+                    <span class="material-icons text-primary text-4xl">restaurant</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">For Restaurants</h3>
+                <p class="text-slate-600 dark:text-gray-300">
+                    Access a lucrative new revenue stream with reliable, high-volume corporate orders. Plan your prep
+                    better and reduce food waste with scheduled bulk requests.
+                </p>
+            </div>
+            <!-- Box 3 -->
+            <div class="text-center p-6 group">
+                <div
+                    class="mx-auto w-20 h-20 bg-white dark:bg-surface-dark rounded-full shadow-md flex items-center justify-center mb-6 border border-neutral-100 dark:border-neutral-800 group-hover:scale-110 transition-transform duration-300">
+                    <span class="material-icons text-primary text-4xl">handshake</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Seamless Connection</h3>
+                <p class="text-slate-600 dark:text-gray-300">
+                    Our platform handles the scheduling, split payments, and logistics, ensuring a perfectly timed
+                    delivery that keeps teams happy, full, and productive.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mb-10">
+        <div
+            class="bg-primary rounded-3xl p-10 md:p-14 text-center shadow-2xl shadow-primary/20 relative overflow-hidden">
+            <!-- Decorative circles -->
+            <div class="absolute -top-32 -right-32 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-32 -left-32 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10">Ready to transform your lunch hour?
+            </h2>
+            <p class="text-primary-light text-xl mb-10 max-w-2xl mx-auto relative z-10">
+                Join the growing network of businesses and restaurants optimizing their daily meals with LunchToOffice.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-5 relative z-10">
+                <a href="{% url 'signup' %}"
+                    class="bg-white text-primary font-bold px-8 py-4 rounded-full hover:bg-neutral-50 hover:scale-105 transition-all shadow-lg text-lg">
+                    Sign Up Your Office
+                </a>
+                <a href="{% url 'signup' %}"
+                    class="bg-primary-dark text-white border border-primary-light/30 font-bold px-8 py-4 rounded-full hover:bg-primary-hover hover:scale-105 transition-all shadow-lg text-lg">
+                    Partner as a Restaurant
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

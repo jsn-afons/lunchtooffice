@@ -3,12 +3,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
             <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white">
-                    <span class="material-icons text-lg">lunch_dining</span>
+            <a href="{% url 'home' %}">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white">
+                        <span class="material-icons text-lg">lunch_dining</span>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">LunchToOffice</span>
                 </div>
-                <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">LunchToOffice</span>
-            </div>
+            </a>
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-8 items-center">
                 <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
@@ -17,6 +19,8 @@
                     href="#">Restaurants</a>
                 <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
                     href="#">For Companies</a>
+                <a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                    href="{% url 'aboutus' %}">About Us</a>
             </div>
             <!-- Buttons -->
             <div class="hidden md:flex items-center space-x-4">

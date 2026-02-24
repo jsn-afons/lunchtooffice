@@ -11,9 +11,9 @@ class SignupForm(forms.Form):
     pass
 
 class OrganizationSignUpForm(forms.Form):
-    org_name = forms.CharField(max_length=100)
-    org_phonenumber = PhoneNumberField(region='GH')
-    org_address = forms.CharField(max_length=200)
+    org_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Organization Name', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
+    org_phonenumber = PhoneNumberField(region='GH', widget=forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
+    org_address = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Head Office Address', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
 
     first_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
     last_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))

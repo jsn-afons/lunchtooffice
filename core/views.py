@@ -100,3 +100,6 @@ def menu(request, restaurant_id):
 def logout(request):
     logout(request)
     return redirect('home')
+
+def aboutus(request):
+    return render(request, 'core/aboutus.html')

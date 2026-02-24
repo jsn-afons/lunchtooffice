@@ -109,6 +109,7 @@ class Restaurant(models.Model):
 class Menu(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     menu_item = models.CharField(max_length=50)
+    description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     food_image = ImageField(upload_to='food_images', blank=True, null=True)
 
