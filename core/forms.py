@@ -18,6 +18,7 @@ class OrganizationSignUpForm(forms.Form):
     first_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
     last_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'you@example.com', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
+    user_phonenumber = PhoneNumberField(region='GH', widget=forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm your password', 'class': 'w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'}))
 
@@ -39,7 +40,7 @@ class OrganizationSignUpForm(forms.Form):
         
     def clean_org_name(self):
         org_name = self.cleaned_data.get('org_name')
-        if org_name and Organization.objects.filter(org_name=org_name).exists():
+        if org_name and Organization.objects.filter(name=org_name).exists():
             raise ValidationError('Organization already exists')
         return org_name
 

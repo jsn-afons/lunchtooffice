@@ -134,10 +134,16 @@ scrollbar-width: none;
                 <div
                     class="group bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-sm hover:shadow-md border border-neutral-200 dark:border-neutral-700 transition-all duration-300 flex gap-4">
                     <div class="relative w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg">
+                        {% if item.image %}
+                        <img alt="Jollof Rice"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Spicy Jollof rice with chicken" src="{{ item.image.url }}" />
+                        {% else %}
                         <img alt="Jollof Rice"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             data-alt="Spicy Jollof rice with chicken"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgBSw1HQR9PhrBup4XXKx6HtnErsmV3v4DdqeXjqH69eaOprdL0GfGChRzY6mhqtdiLNulRNxMHo-mlQx_23ujq1oawFdf1LMqDJb6bZtAOd9ZExJiPXjF-Lbn3ebOYRxmBDhRk-Lv_1wGYO5UKT0J1_O_yMFGjWEjHeLjgd8gg4VNIsr4zv7wONzAsrv1aoKN-Aeaseh8wlLjMQgJFIac865qkTXS_KozAlhHwdb_zFU6M-q4fqnEomgUhrAnTkwDYctfMjIZxKNj" />
+                            src="https://placehold.co/600x400/png?text=No+Image" />
+                        {% endif %}
                         <div
                             class="absolute top-1 right-1 bg-white/90 dark:bg-black/80 text-[10px] font-bold px-1.5 py-0.5 rounded text-neutral-600 dark:text-neutral-300 shadow-sm">
                             Hot

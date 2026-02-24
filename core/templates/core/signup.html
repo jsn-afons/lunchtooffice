@@ -41,7 +41,16 @@ color: #e9590c;
 {% endif %}
 <!-- Main Container -->
 <div class="w-full max-w-2xl">
-
+    {% if form.errors %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+        <strong class="font-bold">Hol' up! There are errors:</strong>
+        <ul>
+            {% for field, errors in form.errors.items %}
+            <li><strong>{{ field }}:</strong> {{ errors.0 }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
     <!-- Card -->
     <div
@@ -69,6 +78,13 @@ color: #e9590c;
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 for="id_org_name">Organization Name</label>
                             {{ form.org_name }}
+                            {% if form.org_name.errors %}
+                            <div class="text-red-500 text-xs mt-1">
+                                {% for error in form.org_name.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -132,18 +148,23 @@ color: #e9590c;
                                 {{ form.last_name }}
                             </div>
                         </div>
-                        <!-- Email -->
-                        <div class="space-y-1.5">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="email">Work
-                                Email</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <!-- <span class="material-icons-round text-gray-400 text-lg">email</span> -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <!-- Email -->
+                            <div class="space-y-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="email">Work Email</label>
+                                <div class="relative">
+                                    {{ form.email }}
                                 </div>
-                                <!-- <input
-                                class="block w-full pl-10 rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5"
-                                id="email" name="email" placeholder="jane@company.com" type="email" /> -->
-                                {{ form.email }}
+                            </div>
+
+                            <!-- User Phone Number -->
+                            <div class="space-y-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="user_phonenumber">Phone Number</label>
+                                <div class="relative">
+                                    {{ form.user_phonenumber }}
+                                </div>
                             </div>
                         </div>
                         <!-- Password Row -->
@@ -191,11 +212,13 @@ color: #e9590c;
             </div>
             <!-- Submit Action -->
             <div>
+
                 <button
                     class="flex w-full justify-center rounded-lg bg-primary py-3 px-4 text-sm font-bold text-white shadow-sm hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors duration-200"
                     type="submit">
                     Create Account
                 </button>
+
                 <p class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
                     Already have an account?
                     <a class="font-bold leading-6 text-primary hover:text-primary-hover hover:underline transition-all"

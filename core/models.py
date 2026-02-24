@@ -63,14 +63,14 @@ class Organization(models.Model):
     name = models.CharField(max_length=100)
     phonenumber = PhoneNumberField(blank=True, region='GH')
     address = models.CharField(max_length=255, help_text="Address of the organization")
-    invite_token = models.UUIDField(unique=True, default =uuid.uuid4, editable=False) #Attached to a url to add users to organizations
+    invite_token = models.UUIDField(unique=True, default=uuid.uuid4, editable=False) #Attached to a url to add users to organizations
     
     def __str__(self):
         return self.name.title()
 
 class User(AbstractUser):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, blank=True)
-    phonenumber = PhoneNumberField(blank=True, region='GH')
+    phonenumber = PhoneNumberField(blank=True, null=True, region='GH')
     username = None #Remove Username from table
     USERNAME_FIELD = 'email' #Tells django to use email instead of username
     email = models.EmailField(unique=True)
