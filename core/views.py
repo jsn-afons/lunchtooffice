@@ -98,6 +98,30 @@ def menu(request, restaurant_id):
     }
     return render(request, 'core/menu.html', context)
 
+@login_required
+def add_to_cart(request):
+    if request.method == 'POST':
+        order = request.POST.get('order')
+        quantity = request.POST.get('quantity')
+        Order.objects.create(
+            user = request.user,
+            menu_item = order,
+            quantity = quantity,
+        )
+        return redirect('menu', restaurant_id)
+
+@login_required
+def checkout_cart(request):
+    with transaction.atomic():
+        order = Order.objects.create(
+            user = request.user,
+        )
+            
+
+
+
+        
+
 def logout(request):
     logout(request)
     return redirect('home')

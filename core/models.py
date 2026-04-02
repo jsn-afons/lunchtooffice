@@ -1,3 +1,4 @@
+from unicodedata import decimal
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 import uuid
@@ -139,5 +140,44 @@ class UserOrderAction(models.Model):
 
     def __str__(self):
         return f"{self.user} ordered {self.quantity} of {self.menu_item}"
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def total_price(self):
+        # Calculate the sum of the total for all related OrderItems
+        # The 'order_items' in the filter and F expression refers to the related_name in OrderItem's ForeignKey
+        total = self.order_items.aggregate(
+            total_sum=Sum(F('menu_item__price') * F('quantity'), output_field=DecimalField())
+        )['total_sum']
+        return total if total is not None else Decimal('0.00')
+    
+    def __str__(self):
+        return f"{self.user} ordered from {self.restaurant} at {self.datetime}"
+    
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    menu_item = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    @property
+    def subtotal(self):
+        return self.menu_item.price * self.quantity
+
+    def __str__(self):
+        return f"{self.order} ordered {self.quantity} of {self.menu_item}"
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user}'s cart"
+    
 
     
