@@ -48,6 +48,100 @@
         rel="stylesheet" />
     {% block extra_head %}{% endblock %}
     <style>
+        :root {
+            --color-primary: #e9590c;
+            --color-primary-dark: #c2410c;
+            --color-primary-hover: #cc4d0a;
+            --color-primary-light: #fed7aa;
+            --color-bg-light: #f8f6f5;
+            --color-bg-dark: #221610;
+            --color-surface-light: #ffffff;
+            --color-surface-dark: #2d1f18;
+        }
+
+        /* Force visible button styles even if Tailwind CDN custom colors fail */
+        .bg-primary {
+            background-color: var(--color-primary) !important;
+        }
+        .hover\:bg-primary:hover {
+            background-color: var(--color-primary) !important;
+        }
+        .hover\:bg-primary-dark:hover,
+        .hover\:bg-primary-hover:hover {
+            background-color: var(--color-primary-dark) !important;
+        }
+        .text-primary {
+            color: var(--color-primary) !important;
+        }
+        .border-primary {
+            border-color: var(--color-primary) !important;
+        }
+        .bg-primary\/10 {
+            background-color: color-mix(in srgb, var(--color-primary) 10%, transparent) !important;
+        }
+        .bg-primary\/20 {
+            background-color: color-mix(in srgb, var(--color-primary) 20%, transparent) !important;
+        }
+        .bg-primary\/5 {
+            background-color: color-mix(in srgb, var(--color-primary) 5%, transparent) !important;
+        }
+        .bg-primary-light {
+            background-color: var(--color-primary-light) !important;
+        }
+        .bg-background-light {
+            background-color: var(--color-bg-light) !important;
+        }
+        .bg-background-dark {
+            background-color: var(--color-bg-dark) !important;
+        }
+        .bg-surface-light {
+            background-color: var(--color-surface-light) !important;
+        }
+        .bg-surface-dark {
+            background-color: var(--color-surface-dark) !important;
+        }
+        .shadow-primary\/30 {
+            box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--color-primary) 30%, transparent) !important;
+        }
+        .shadow-primary\/25 {
+            box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--color-primary) 25%, transparent) !important;
+        }
+        .shadow-primary\/20 {
+            box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--color-primary) 20%, transparent) !important;
+        }
+        .ring-primary {
+            --tw-ring-color: var(--color-primary) !important;
+        }
+        .focus\:ring-primary:focus {
+            --tw-ring-color: var(--color-primary) !important;
+        }
+        .focus-visible\:outline-primary:focus-visible {
+            outline-color: var(--color-primary) !important;
+        }
+        .accent-primary {
+            accent-color: var(--color-primary) !important;
+        }
+
+        /* Dark mode overrides */
+        .dark .bg-primary {
+            background-color: var(--color-primary) !important;
+        }
+        .dark .text-primary {
+            color: var(--color-primary) !important;
+        }
+        .dark .bg-background-light {
+            background-color: var(--color-bg-dark) !important;
+        }
+        .dark .bg-surface-light {
+            background-color: var(--color-surface-dark) !important;
+        }
+
+        /* Ensure buttons with primary backgrounds have white text */
+        button.bg-primary,
+        a.bg-primary {
+            color: #ffffff !important;
+        }
+
         {% block styles %}
 
             {% endblock %}
